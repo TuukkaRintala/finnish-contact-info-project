@@ -1,28 +1,49 @@
 package main.java.rintalatuukka.contacts.objects;
 
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
+import main.java.rintalatuukka.contacts.util.Validation;
 
 public class Contact {
-    private int dateOfBirth;
-    private int id;
+    private String id;
     private String[] firstNames = new String[1];
     private String lastName;
     private String phoneNumber;
-    // private String address;
+    private String address;
     // private int zipCode;
     // private String city;
     private String email;
     public Contact() {
-
+        
+    }
+    public Contact(String startId, String[] startFirstNames,
+                   String startLastName, String startPhoneNumber,
+                   String startAddress, String startEmail) {
+        setId(startId);
+        setFirstNames(startFirstNames);
+        setLastName(startLastName);
+        setPhoneNumber(startPhoneNumber);
+        setAddress(startAddress);
+        setEmail(startEmail);
+    }
+    public Contact(String startId, String[] startFirstNames,
+                   String startLastName, String startPhoneNumber,
+                   String startAddress) {
+        setId(startId);
+        setFirstNames(startFirstNames);
+        setLastName(startLastName);
+        setPhoneNumber(phoneNumber);
+        setAddress(startAddress);
+    }
+    public Contact(String startId, String[] startFirstNames,
+                   String startLastName, String startPhoneNumber) {
+        setId(startId);
+        setFirstNames(startFirstNames);
+        setLastName(startLastName);
+        setPhoneNumber(startPhoneNumber);
     }
     public String getId() {
-        return (("" + dateOfBirth) + id);
+        return ("" + id);
     }
-    public void setId(int newDob, int newId) {
-        if (true) {
-            dateOfBirth = newDob;
-        }
+    public void setId(String newId) {
         if (true) {
             id = newId;
         }
@@ -51,14 +72,14 @@ public class Contact {
             phoneNumber = newPhoneNumber;
         }
     }
-    /*
     public String getAddress() {
-        return (address + zipCode + city);
+        return (address);
     }
     public void setAddress(String newAddress) {
-        
+        if (true) {
+            address = newAddress;
+        }
     }
-    */
     public String getEmail() {
         return email;
     }
