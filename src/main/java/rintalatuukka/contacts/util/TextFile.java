@@ -3,12 +3,21 @@ package main.java.rintalatuukka.contacts.util;
 import main.java.rintalatuukka.contacts.objects.Contact;
 import java.io.File;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.charset.Charset;
 import java.util.List;
 
+/**
+ * This class deals with manipulating the contents of the CSV-file that stores
+ * contact info.
+ *
+ * @author Tuukka Rintala
+ */
+
 public class TextFile {
-    public static boolean OpenContacts(final File contacts) {
+    public static List<Info[]> openContacts(final File contacts) {
         boolean successful = true;
         try {
             List<String> commaSeparated = 
@@ -35,38 +44,37 @@ public class TextFile {
     }
     private static Contact stringToContact(final String start, final char separator) {
         final int contactInfoFields = 6;
-        final int optionalFields = 2;
         final String csvRegex = ("[" + separator + "]");
         final String nameRegex = ("[.]")
         String[] separated = start.split(csvRegex, contactInfoFields);
-        if (separated.length < (contactInfoFields - optionalFields)) {
+        if (separated.length != contactInfoFields) {
             throw new IllegalArgumentException(
-                            "contains too few arguments, contents discarded");
+                  "contains too few or too many arguments, contents discarded");
         } else {
             Contact parsedContact = new Contact();
-            switch (separated.length) {
-                case 4: try {
-                        parsedContact = new Contact(separated[0],
-                        separated[1].split(nameRegex), separated.[2],
-                        separated[3]);
-                } catch (IllegalArgumentException e) {
-                    throw e;
-                }
-                case 5: try {
-                        parsedContact = new Contact(separated[0],
-                        separated[1].split(nameRegex), separated.[2],
-                        separated[3], separated[4]);
-                } catch (IllegalArgumentException e) {
-                    throw e;
-                }
-                default: try {
-                        parsedContact = new Contact(separated[0],
-                        separated[1].split(nameRegex), separated.[2],
-                        separated[3], separated[4], separated[5]);
-                } catch (IllegalArgumentException e) {
-                    throw e;
-                }
+            try {
+                parsedContact = new Contact(separated[0],
+                separated[1].split(nameRegex), separated.[2],
+                separated[3], separated[4], separated[5]);
+            } catch (IllegalArgumentException e) {
+                throw e; // fucks up the last two being optional unless you 
+                // don't throw errors from them?
             }
         }
+    }
+    public static void updateFile(File contacts, List<Contact> saveData) {
+
+    }
+    public static void appendFile(File contacts, Contact addThis) {
+        
+    }
+    public static boolean validPath(String path) {
+        File checkThis = new File(path);
+        if (!checkThis.canRead()) {
+            return false;
+        } else if (!checkThis.canWrite()) {
+            return false;
+        }
+        return true;
     }
 }

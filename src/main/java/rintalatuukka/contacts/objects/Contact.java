@@ -3,14 +3,14 @@ package main.java.rintalatuukka.contacts.objects;
 import main.java.rintalatuukka.contacts.util.Validation;
 
 public class Contact {
-    private String id;
-    private String[] firstNames = new String[1];
-    private String lastName;
-    private String phoneNumber;
-    private String address;
+    private String id = "";
+    private String[] firstNames = {""};
+    private String lastName = "";
+    private String phoneNumber = "";
+    private String address = "";
     // private int zipCode;
     // private String city;
-    private String email;
+    private String email = "";
     public Contact() {
         
     }
@@ -24,35 +24,30 @@ public class Contact {
         setAddress(startAddress);
         setEmail(startEmail);
     }
-    public Contact(String startId, String[] startFirstNames,
-                   String startLastName, String startPhoneNumber,
-                   String startAddress) {
-        setId(startId);
-        setFirstNames(startFirstNames);
-        setLastName(startLastName);
-        setPhoneNumber(phoneNumber);
-        setAddress(startAddress);
-    }
-    public Contact(String startId, String[] startFirstNames,
-                   String startLastName, String startPhoneNumber) {
-        setId(startId);
-        setFirstNames(startFirstNames);
-        setLastName(startLastName);
-        setPhoneNumber(startPhoneNumber);
-    }
     public String getId() {
-        return ("" + id);
+        return (id);
     }
     public void setId(String newId) {
-        if (true) {
+        if (Validation.idValidation(newId)) {
             id = newId;
+        } else {
+            throw new IllegalArgumentException("Invalid id")
         }
     }
     public String getFirstNames() {
         return firstNames[0];
     }
     public void setFirstNames(String[] newFirstNames) {
-        if (true) {
+        boolean namesValid = false;
+        for(int i = 0; newFirstNames.length; i++) {
+            if (Validation.nameValidation(newFirstNames[i])) {
+                namesValid = true;
+            } else {
+                namesValid = false;
+                throw new IllegalArgumentException("Invalid first names");
+            }
+        }
+        if (namesValid) {
             firstNames = newFirstNames;
         }
     }
@@ -68,8 +63,10 @@ public class Contact {
         return phoneNumber;
     }
     public void setPhoneNumber(String newPhoneNumber) {
-        if (true) {
+        if (Validation.phoneValidation(newPhoneNumber)) {
             phoneNumber = newPhoneNumber;
+        } else {
+            throw new IllegalArgumentException("Invalid phone number")
         }
     }
     public String getAddress() {
@@ -84,8 +81,17 @@ public class Contact {
         return email;
     }
     public void setEmail(String newEmail) {
-        if (true) {
+        if (Validation.emailValidation(newEmail)) {
             email = newEmail;
+        } else {
+            throw new IllegalArgumentException("Invalid email");
         }
+    }
+    public String toString() {
+        names = "";
+        for (int i = 0; i < firstNames.length; i++) {
+            names += firstNames[i] + " ";
+        }
+        return (id + " | " + names + "| " + lastName + " | " + phoneNumber + " | " + address + " | " + email);
     }
 }

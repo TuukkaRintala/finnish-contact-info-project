@@ -1,6 +1,11 @@
+package;
+
 import main.java.rintalatuukka.contacts.util.TextFile;
+import main.java.rintalatuukka.contacts.util.GetInputs;
+import main.java.rintalatuukka.contacts.objects.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 /**
  * This class starts the program and its purpose is to maintain a text file
  * containing finnish contact information.
@@ -28,6 +33,10 @@ public class ContactsApp {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        successful = TextFile.OpenContacts(contacts);
+        successful = TextFile.openContacts(contacts);
+        boolean quit = false;
+        while (!quit) {
+            GetInputs.getValidCommand();
+        }
     }
 }
