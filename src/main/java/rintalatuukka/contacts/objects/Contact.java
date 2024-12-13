@@ -31,7 +31,7 @@ public class Contact {
         if (Validation.idValidation(newId)) {
             id = newId;
         } else {
-            throw new IllegalArgumentException("Invalid id")
+            throw new IllegalArgumentException("Invalid id");
         }
     }
     public String getFirstNames() {
@@ -66,7 +66,7 @@ public class Contact {
         if (Validation.phoneValidation(newPhoneNumber)) {
             phoneNumber = newPhoneNumber;
         } else {
-            throw new IllegalArgumentException("Invalid phone number")
+            throw new IllegalArgumentException("Invalid phone number");
         }
     }
     public String getAddress() {

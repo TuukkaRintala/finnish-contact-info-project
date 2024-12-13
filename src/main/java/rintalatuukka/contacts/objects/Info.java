@@ -6,9 +6,9 @@ package main.java.rintalatuukka.contacts.objects;
   *
   * @author Tuukka Rintala
   */
-public Interface Info {
+public interface Info {
     public String getInfo();
     public void setInfo(String newInfo);
-    private boolean validate(String info);
+    private abstract boolean validate(String info);
     public void inputInfo();
 }

@@ -1,7 +1,9 @@
 package main.java.rintalatuukka.contacts.objects;
 
-import main.java.rintalatuukka.contacts.Info;
-import java.io.Console;
+import main.java.rintalatuukka.contacts.objects.Info;
+import main.java.rintalatuukka.contacts.util.GetInputs;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 /**
  * This object contains the info for a finnish ID and methods to manipulate that
@@ -10,21 +12,27 @@ import java.io.Console;
 
 public class Id implements Info {
     private String info = "";
-    public Id(String startId) {
-        setInfo(startId);
+    public Id(String startInfo) {
+        setInfo(startInfo);
     }
     public String getInfo() {
         return info;
     }
     public void setInfo(String newInfo) {
-        if (Validation.idValidation(newInfo)) {
+        if (validate(newInfo)) {
             info = newInfo;
         } else {
             throw new IllegalArgumentException("Invalid id")
         }
     }
     private boolean validate(String info) {
-
+        // This regex is from https://regex101.com/library/cIohyA, and has been
+        // edited to include A-F and U-W as the century sign.
+        final String regex = "^(0[1-9]|[1-2][0-9]|3[0-1])(0[1-9]|1[0-2])[0-9]" +
+        "{2}[[A-F][U-Y]+-][0-9]{3}[A-z0-9]$";
+        Pattern idPattern = Pattern.compile(regex);
+        Matcher idMatcher = idPattern.matcher(info);
+        return idMatcher.matches();
     }
     public void inputInfo() {
         boolean validInput = false;
@@ -33,7 +41,7 @@ public class Id implements Info {
             System.out.println("Please give the id of the contact:");
             validInput = true;
             try {
-                addThis.setId(c.readLine().trim());
+                addThis.setId(GetInputs.getInput());
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 validInput = false;

@@ -1,6 +1,5 @@
 package main.java.rintalatuukka.contacts.util;
 
-import ContactsApp;
 import java.io.Console;
 import java.util.Arrays;
 
@@ -11,9 +10,8 @@ import java.util.Arrays;
  * @author Tuukka Rintala
  */
 public class GetInputs {
-    private final String[] COMMANDS = {"h", "e", "q", "o"};
-    private final Console C = System.console();
-    public static boolean getValidCommand() {
+    private static final Console C = System.console();
+    public static boolean getValidCommand(String[] COMMANDS) {
         boolean validInput = false;
         String input = "";
         System.out.println("Give a command. h for help.");
@@ -22,26 +20,12 @@ public class GetInputs {
             if (Arrays.binarySearch(COMMANDS, input)) {
                 validInput = true;
             } else {
-                System.out.println("Command not recognised.")
+                System.out.println("Command not recognised.");
             }
         }
-        if (input.equalsIgnoreCase(COMMANDS[0])) {
-            help();
-            return true;
-        } else if (input.equalsIgnoreCase(COMMANDS[1]) || 
-                   input.equalsIgnoreCase(COMMANDS[2]) ) {
-            return false;
-        } else if (input.equalsIgnoreCase(COMMANDS[3])) {
-            System.out.println("Give the path of the file you want to open:");
-            try {
-                boolean exists = TextFile.validPath(C.readLine().trim());
-                if (exists) {
-                    // call ContactsApp
-                }
-            } catch(NullPointerException e) {
-                System.out.println("You need to input a path.")
-            }
-        }
+    }
+    public static String getInput() {
+        return C.readLine().trim();
     }
     /*
     public static Contact addNewContact() {
@@ -59,7 +43,4 @@ public class GetInputs {
         }
     }
     */
-   public static void help() {
-        System.out.println();
-   }
 }

@@ -1,6 +1,6 @@
 package main.java.rintalatuukka.contacts.util;
 
-import main.java.rintalatuukka.contacts.objects.Contact;
+import main.java.rintalatuukka.contacts.objects.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.BufferedReader;
@@ -17,35 +17,35 @@ import java.util.List;
  */
 
 public class TextFile {
+    private static final char SEPARATOR = ';';
     public static List<Info[]> openContacts(final File contacts) {
         boolean successful = true;
         try {
             List<String> commaSeparated = 
                 Files.readAllLines(contacts.toPath(), Charset.defaultCharset());
         } catch (IOException e) {
-            System.out.println(e.getMessage());
-            return false;
+            throw e;
         }
-        return true;
+        List<Info[]> contactList = parseContactList(commaSeparated);
+        return contactList;
     }
-    private static List<Contact> parseContactList(final List<String> contactList,
-                                                  final char separator) {
+    private static List<Info[]> parseContactList(final List<String> contactList) {
         List<Contact> parsedList = new List<Contact>();
         int missingLines = 0; // TODO, after reading contacts, give the user a
         // chance to stop the program before updating the csv.
         for (int i = 0; i < contactList.size(); i++) {
             try {
-                parsedList.add(stringToContact(contactList.get(i), separator));
+                parsedList.add(stringToContact(contactList.get(i), SEPARATOR));
             } catch (IllegalArgumentException e) {
                 System.out.println("Line " + (i + 1) + e.getMessage());
                 missingLines++;
             }
         }
     }
-    private static Contact stringToContact(final String start, final char separator) {
+    private static Contact stringToContact(final String start, final char SEPARATOR) {
         final int contactInfoFields = 6;
-        final String csvRegex = ("[" + separator + "]");
-        final String nameRegex = ("[.]")
+        final String csvRegex = ("[" + SEPARATOR + "]");
+        final String nameRegex = ("[.]");
         String[] separated = start.split(csvRegex, contactInfoFields);
         if (separated.length != contactInfoFields) {
             throw new IllegalArgumentException(
@@ -54,7 +54,7 @@ public class TextFile {
             Contact parsedContact = new Contact();
             try {
                 parsedContact = new Contact(separated[0],
-                separated[1].split(nameRegex), separated.[2],
+                separated[1].split(nameRegex), separated[2],
                 separated[3], separated[4], separated[5]);
             } catch (IllegalArgumentException e) {
                 throw e; // fucks up the last two being optional unless you 
