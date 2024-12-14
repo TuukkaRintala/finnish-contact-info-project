@@ -11,18 +11,19 @@ import java.util.Arrays;
  */
 public class GetInputs {
     private static final Console C = System.console();
-    public static boolean getValidCommand(String[] COMMANDS) {
+    public static String getValidCommand(String[] COMMANDS) {
         boolean validInput = false;
         String input = "";
         System.out.println("Give a command. h for help.");
         while (!validInput) {
             input = C.readLine().trim();
-            if (Arrays.binarySearch(COMMANDS, input)) {
+            if (Arrays.binarySearch(COMMANDS, input) < -1) {
                 validInput = true;
             } else {
                 System.out.println("Command not recognised.");
             }
         }
+        return input;
     }
     public static String getInput() {
         return C.readLine().trim();

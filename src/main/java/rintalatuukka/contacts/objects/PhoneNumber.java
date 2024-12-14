@@ -22,10 +22,10 @@ public class PhoneNumber implements Info {
         if (validate(newInfo)) {
             info = newInfo;
         } else {
-            throw new IllegalArgumentException("Invalid id")
+            throw new IllegalArgumentException("Invalid phone number.");
         }
     }
-    private boolean validate(String info) {
+    public boolean validate(String info) {
         // This regex is modified from https://ihateregex.io/expr/phone/ to
         // escape the characters properly in Java.
         final String regex = "^[+]?[(]?[0-9]{3}[)]?[-\s\\.]?[0-9]{3}[-\s\\.]?" +

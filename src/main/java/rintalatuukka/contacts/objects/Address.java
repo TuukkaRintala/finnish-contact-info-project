@@ -25,11 +25,11 @@ public class Address implements Info {
         if (validate(newInfo)) {
             info = newInfo;
         } else {
-            throw new IllegalArgumentException("Invalid id")
+            throw new IllegalArgumentException("Invalid address.");
         }
     }
-    private boolean validate(String info) {
-
+    public boolean validate(String info) {
+        return true;
     }
     public void inputInfo() {
         boolean validInput = false;

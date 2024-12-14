@@ -62,7 +62,7 @@ public class ContactsApp {
                     openNewFile();
                 } else {
                     fileName = path;
-                    contactList = TextFile.openContacts(new File())
+                    contactList = TextFile.openContacts(new File(path));
                 }
             } catch(NullPointerException e) {
                 System.out.println("You need to input a path.");

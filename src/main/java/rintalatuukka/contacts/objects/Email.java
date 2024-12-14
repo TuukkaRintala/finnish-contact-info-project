@@ -22,10 +22,10 @@ public class Email implements Info {
         if (validate(newInfo)) {
             info = newInfo;
         } else {
-            throw new IllegalArgumentException("Invalid id")
+            throw new IllegalArgumentException("Invalid email.");
         }
     }
-    private boolean validate(String info) {
+    public boolean validate(String info) {
         // This regex is from https://regex101.com/library/SOgUIV.
         final String regex = "^((?!\\.)[\\w\\-_.]*[^.])(@\\w+)" +
                              "(\\.\\w+(\\.\\w+)?[^.\\W])$";

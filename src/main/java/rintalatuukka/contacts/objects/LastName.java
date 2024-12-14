@@ -22,10 +22,10 @@ public class LastName implements Info {
         if (validate(newInfo)) {
             info = newInfo;
         } else {
-            throw new IllegalArgumentException("Invalid id")
+            throw new IllegalArgumentException("Invalid last name.");
         }
     }
-    private boolean validate(String info) {
+    public boolean validate(String info) {
         // The inclusion of nordic letters in the regex is from stackoverflow,
         // slightly modified: https://bit.ly/3ZJnEG9
         final String regex = "^[([A-Z]|Å|Ä|Ö)][([a-z]|å|ä|ö)+]{2,50}";

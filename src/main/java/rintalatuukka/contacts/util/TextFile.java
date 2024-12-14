@@ -21,6 +21,7 @@ public class TextFile {
     public static List<Info[]> openContacts(final File contacts) {
         boolean successful = true;
         try {
+            // initialise outside the try-catch
             List<String> commaSeparated = 
                 Files.readAllLines(contacts.toPath(), Charset.defaultCharset());
         } catch (IOException e) {
@@ -30,7 +31,7 @@ public class TextFile {
         return contactList;
     }
     private static List<Info[]> parseContactList(final List<String> contactList) {
-        List<Contact> parsedList = new List<Contact>();
+        List<Info[]> parsedList = new List<Info[]>();
         int missingLines = 0; // TODO, after reading contacts, give the user a
         // chance to stop the program before updating the csv.
         for (int i = 0; i < contactList.size(); i++) {
@@ -42,30 +43,33 @@ public class TextFile {
             }
         }
     }
-    private static Contact stringToContact(final String start, final char SEPARATOR) {
+    private static Info[] stringToContact(final String start) {
         final int contactInfoFields = 6;
         final String csvRegex = ("[" + SEPARATOR + "]");
-        final String nameRegex = ("[.]");
+        final String subRegex = ("[.]");
+        Info[] parsedContact = new Info[contactInfoFields];
         String[] separated = start.split(csvRegex, contactInfoFields);
         if (separated.length != contactInfoFields) {
             throw new IllegalArgumentException(
-                  "contains too few or too many arguments, contents discarded");
+                  "contains too few arguments, contents discarded");
         } else {
-            Contact parsedContact = new Contact();
             try {
-                parsedContact = new Contact(separated[0],
-                separated[1].split(nameRegex), separated[2],
-                separated[3], separated[4], separated[5]);
+                parsedContact[0] = new Id(separated[0]);
+                parsedContact[1] = new FirstName(separated[1]);
+                parsedContact[2] = new LastName(separated[2]);
+                parsedContact[3] = new PhoneNumber(separated[3]);
+                parsedContact[4] = new Address(separated[4]);
+                parsedContact[5] = new Email(separated[5]);
             } catch (IllegalArgumentException e) {
                 throw e; // fucks up the last two being optional unless you 
                 // don't throw errors from them?
             }
         }
     }
-    public static void updateFile(File contacts, List<Contact> saveData) {
+    public static List<Info[]> updateFile(File contacts, List<Info[]> contactList) {
 
     }
-    public static void appendFile(File contacts, Contact addThis) {
+    public static List<Info[]> appendFile(File contacts, List<Info[]> contactList) {
         
     }
     public static boolean validPath(String path) {
@@ -76,5 +80,8 @@ public class TextFile {
             return false;
         }
         return true;
+    }
+    public static void saveIntoFile(File contacts, List<Info[]> contactList) {
+
     }
 }

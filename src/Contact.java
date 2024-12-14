@@ -1,4 +1,4 @@
-package main.java.rintalatuukka.contacts.objects;
+
 
 import main.java.rintalatuukka.contacts.util.Validation;
 

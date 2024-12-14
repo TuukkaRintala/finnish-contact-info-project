@@ -22,10 +22,10 @@ public class Id implements Info {
         if (validate(newInfo)) {
             info = newInfo;
         } else {
-            throw new IllegalArgumentException("Invalid id")
+            throw new IllegalArgumentException("Invalid ID.");
         }
     }
-    private boolean validate(String info) {
+    public boolean validate(String info) {
         // This regex is from https://regex101.com/library/cIohyA, and has been
         // edited to include A-F and U-W as the century sign.
         final String regex = "^(0[1-9]|[1-2][0-9]|3[0-1])(0[1-9]|1[0-2])[0-9]" +
