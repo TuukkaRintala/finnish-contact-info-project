@@ -28,6 +28,19 @@ public class GetInputs {
     public static String getInput() {
         return C.readLine().trim();
     }
+    public static boolean yesOrNo(String question) {
+        boolean validInput = false;
+        String input = "";
+        while (!validInput) {
+            System.out.println(question);
+            input = getInput();
+            if (input.equalsIgnoreCase("y")) {
+                return true;
+            } else if (input.equalsIgnoreCase("n")) {
+                return false;
+            }
+        }
+    }
     /*
     public static Contact addNewContact() {
         boolean validInput = false;

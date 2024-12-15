@@ -83,18 +83,47 @@ public class Address implements Info {
     }
     public void inputInfo() {
         boolean validInput = false;
-        while (!validInput) {
-            System.out.println("Please give the id of the contact:");
-            validInput = true;
-            try {
-                addThis.setId(GetInputs.getInput());
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-                validInput = false;
+        boolean inputThis = GetInputs.yesOrNo("Input a street address? (y/n)");
+        if (inputThis) {
+            while (!validInput) {
+                System.out.println("Please give the street address of the" +
+                                   " contact:");
+                setAddress(GetInputs.getInput());
+                if (!address.equals("")) {
+                    validInput = true;
+                }
+            }
+        }
+        inputThis = GetInputs.yesOrNo("Input a zip code? (y/n)");
+        if (inputThis) {
+            while (!validInput) {
+                System.out.println("Please give the zip code of the contact:");
+                setZipCode(GetInputs.getInput());
+                if (!zipCode.equals("")) {
+                    validInput = true;
+                }
+            }
+        }
+        inputThis = GetInputs.yesOrNo("Input a city? (y/n)");
+        if (inputThis) {
+            while (!validInput) {
+                System.out.println("Please give the city of the contact:");
+                setCity(GetInputs.getInput());
+                if (!city.equals("")) {
+                    validInput = true;
+                }
             }
         }
     }
     public String toString() {
-        return (street + " " + zipCode + " " + city);
+        String info = "";
+        if (!street.equals("")) {
+            info += street + " ";
+        }
+        if (!zipCode.equals("")) {
+            info += zipCode + " ";
+        }
+        info += city;
+        return info;
     }
 }
