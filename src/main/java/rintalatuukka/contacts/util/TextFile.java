@@ -8,6 +8,7 @@ import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.charset.Charset;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * This class deals with manipulating the contents of the CSV-file that stores
@@ -31,7 +32,7 @@ public class TextFile {
         return contactList;
     }
     private static List<Info[]> parseContactList(final List<String> contactList) {
-        List<Info[]> parsedList = new List<Info[]>();
+        List<Info[]> parsedList = new ArrayList<>();
         int missingLines = 0; // TODO, after reading contacts, give the user a
         // chance to stop the program before updating the csv.
         for (int i = 0; i < contactList.size(); i++) {
@@ -46,7 +47,6 @@ public class TextFile {
     private static Info[] stringToContact(final String start) {
         final int contactInfoFields = 6;
         final String csvRegex = ("[" + SEPARATOR + "]");
-        final String subRegex = ("[.]");
         Info[] parsedContact = new Info[contactInfoFields];
         String[] separated = start.split(csvRegex, contactInfoFields);
         if (separated.length != contactInfoFields) {

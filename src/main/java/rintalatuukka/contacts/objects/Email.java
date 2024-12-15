@@ -35,7 +35,6 @@ public class Email implements Info {
     }
     public void inputInfo() {
         boolean validInput = false;
-        Contact addThis = new Contact();
         while (!validInput) {
             System.out.println("Please give the id of the contact:");
             validInput = true;

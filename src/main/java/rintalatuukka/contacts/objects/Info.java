@@ -9,6 +9,5 @@ package main.java.rintalatuukka.contacts.objects;
 public interface Info {
     public String getInfo();
     public void setInfo(String newInfo);
-    public boolean validate(String info);
     public void inputInfo();
 }

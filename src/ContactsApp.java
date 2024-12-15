@@ -1,9 +1,9 @@
-import main.java.rintalatuukka.contacts.util.TextFile;
-import main.java.rintalatuukka.contacts.util.GetInputs;
+import main.java.rintalatuukka.contacts.util.*;
 import main.java.rintalatuukka.contacts.objects.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.ArrayList;
 /**
  * This class starts the program and its purpose is to maintain a text file
  * containing finnish contact information.
@@ -18,7 +18,7 @@ public class ContactsApp {
     // case of a caught IOException.
     private static final String IOERRORMSG = "Error with the file name.";
     private static final String[] COMMANDS = {"h", "e", "q", "o", "u", "a"};
-    private static List<Info[]> contactList = new List<Info[]>();
+    private static List<Info[]> contactList = new ArrayList<>();
     private static boolean quit = false;
     /**
      * This method is called when the program is run.
@@ -30,7 +30,7 @@ public class ContactsApp {
         openNewFile();
         String input = "";
         while (!quit) {
-            input = GetInputs.getValidCommand();
+            input = GetInputs.getValidCommand(COMMANDS);
             parseInput(input);
         }
     }
@@ -43,12 +43,24 @@ public class ContactsApp {
             System.out.println(e.getMessage());
         }
         contactList = TextFile.openContacts(contacts);
+        Display.displayContacts(contactList);
     }
     private static void parseInput(String input) {
         if (input.equalsIgnoreCase(COMMANDS[0])) {
             help();
         } else if (input.equalsIgnoreCase(COMMANDS[1]) || 
                    input.equalsIgnoreCase(COMMANDS[2]) ) {
+            boolean validInput = false;
+            while(!validInput) {
+                System.out.println("Are you sure you want to quit? (y/n)");
+                String response = GetInputs.getInput();
+                if (response.equalsIgnoreCase("y")) {
+                    quit = true;
+                    validInput = true;
+                } else if (response.equalsIgnoreCase("n")) {
+                    validInput = true;
+                }
+            }
             quit = true;
         } else if (input.equalsIgnoreCase(COMMANDS[3])) {
             // TODO move asking for path to GetInputs?
