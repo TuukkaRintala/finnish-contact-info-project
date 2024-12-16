@@ -38,11 +38,11 @@ public class ContactsApp {
         boolean successful = true;
         File contacts = new File(fileName);
         try {
+            contactList = TextFile.openContacts(contacts);
             successful = contacts.createNewFile();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        contactList = TextFile.openContacts(contacts);
         Display.displayContacts(contactList);
     }
     private static void parseInput(String input) {

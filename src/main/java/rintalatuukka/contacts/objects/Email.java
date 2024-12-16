@@ -12,6 +12,9 @@ import java.util.regex.Matcher;
 
 public class Email implements Info {
     private String info = "";
+    public Email() {
+        super();
+    }
     public Email(String startInfo) {
         setInfo(startInfo);
     }

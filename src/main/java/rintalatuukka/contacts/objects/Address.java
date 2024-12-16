@@ -15,6 +15,9 @@ public class Address implements Info {
     private String street = "";
     private String zipCode = "";
     private String city = "";
+    public Address() {
+        super();
+    }
     public Address(String startInfo) {
         setInfo(startInfo);
     }
@@ -88,8 +91,8 @@ public class Address implements Info {
             while (!validInput) {
                 System.out.println("Please give the street address of the" +
                                    " contact:");
-                setAddress(GetInputs.getInput());
-                if (!address.equals("")) {
+                setStreet(GetInputs.getInput());
+                if (!street.equals("")) {
                     validInput = true;
                 }
             }

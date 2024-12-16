@@ -12,6 +12,9 @@ import java.util.regex.Matcher;
 
 public class LastName implements Info {
     private String info = "";
+    public LastName() {
+        super();
+    }
     public LastName(String startInfo) {
         setInfo(startInfo);
     }

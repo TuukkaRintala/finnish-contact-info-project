@@ -7,8 +7,16 @@ import java.util.ArrayList;
 import main.java.rintalatuukka.contacts.objects.*;
 import main.java.rintalatuukka.contacts.util.Validation;
 import java.nio.charset.StandardCharsets;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
 public class Test {
     public static void main(final String[] args) {
+        final String regex = "^[a-zA-ZåäöÅÄÖ]+\\s[0-9a-zA-Z]+\\s\\d{5}\\s[a-zA-ZåäöÅÄÖ]+$";
+        Pattern emailPattern = Pattern.compile(regex);
+        Matcher emailMatcher = emailPattern.matcher("Hämeenkatu 1 33100 Tampere");
+        System.out.println(emailMatcher.matches());
+        /*
         File contacts = new File("whatevs.csv");
         try {
             boolean successful = contacts.createNewFile();
@@ -19,6 +27,7 @@ public class Test {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+        */
         /*
         String csv = "310199-547C;Joni;Nikula;+358402245666;Hämeenkatu 17.33800.Tampere;joni.nikula@gmail.com";
         String[] splitCsv = csv.split("[;]", 6);

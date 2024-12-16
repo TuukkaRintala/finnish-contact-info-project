@@ -40,6 +40,7 @@ public class GetInputs {
                 return false;
             }
         }
+        return false;
     }
     /*
     public static Contact addNewContact() {

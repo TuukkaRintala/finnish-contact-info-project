@@ -12,6 +12,9 @@ import java.util.regex.Matcher;
 
 public class PhoneNumber implements Info {
     private String info = "";
+    public PhoneNumber() {
+        super();
+    }
     public PhoneNumber(String startInfo) {
         setInfo(startInfo);
     }

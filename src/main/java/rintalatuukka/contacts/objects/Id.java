@@ -12,6 +12,9 @@ import java.util.regex.Matcher;
 
 public class Id implements Info {
     private String info = "";
+    public Id() {
+        super();
+    }
     public Id(String startInfo) {
         setInfo(startInfo);
     }
