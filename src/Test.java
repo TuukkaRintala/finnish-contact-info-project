@@ -6,10 +6,19 @@ import java.util.List;
 import java.util.ArrayList;
 import main.java.rintalatuukka.contacts.objects.*;
 import main.java.rintalatuukka.contacts.util.Validation;
+import java.nio.charset.StandardCharsets;
 public class Test {
     public static void main(final String[] args) {
-        String[] lol = "asd..".split("[.]", 3);
-        System.out.println(lol[2]);
+        File contacts = new File("whatevs.csv");
+        try {
+            boolean successful = contacts.createNewFile();
+            Files.delete(contacts.toPath());
+            contacts.createNewFile();
+            List<String> commaSeparated = 
+                Files.readAllLines(contacts.toPath(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
         /*
         String csv = "310199-547C;Joni;Nikula;+358402245666;Hämeenkatu 17.33800.Tampere;joni.nikula@gmail.com";
         String[] splitCsv = csv.split("[;]", 6);

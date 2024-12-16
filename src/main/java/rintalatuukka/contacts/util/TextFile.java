@@ -3,10 +3,11 @@ package main.java.rintalatuukka.contacts.util;
 import main.java.rintalatuukka.contacts.objects.*;
 import java.io.File;
 import java.io.IOException;
-import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -24,7 +25,7 @@ public class TextFile {
         try {
             // initialise outside the try-catch
             List<String> commaSeparated = 
-                Files.readAllLines(contacts.toPath(), Charset.defaultCharset());
+                Files.readAllLines(contacts.toPath(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw e;
         }
@@ -66,11 +67,27 @@ public class TextFile {
             }
         }
     }
-    public static List<Info[]> updateFile(File contacts, List<Info[]> contactList) {
-
+    public static List<Info[]> updateFile(final File contacts, 
+                              final List<Info[]> contactList, final int index) {
+        Info[] updateThis = contactList.get(index - 1);
+        for(int i = 0; i < updateThis.length; i++) {
+            updateThis[i].inputInfo();
+        }
+        return contactList;
     }
-    public static List<Info[]> appendFile(File contacts, List<Info[]> contactList) {
-        
+    public static List<Info[]> appendFile(final File contacts, 
+                                          final List<Info[]> contactList) {
+        new Info[] addThis = {new Id(), new FirstName(), new LastName(),
+                              new PhoneNumber(), new Address(), new Email()};
+        for (int i = 0; i < addThis.length; i++) {
+            try {
+                addThis[i].inputInfo();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        contactList.add(addThis);
+        return contactList;
     }
     public static boolean validPath(String path) {
         File checkThis = new File(path);
@@ -81,7 +98,34 @@ public class TextFile {
         }
         return true;
     }
-    public static void saveIntoFile(File contacts, List<Info[]> contactList) {
-
+    public static boolean saveIntoFile(File contacts, List<Info[]> contactList) {
+        if (GetInputs.yesOrNo("Do you want to overwrite saved data?")) {
+            try {
+                Files.delete(contacts.toPath());
+                successful = contacts.createNewFile();
+                BufferedWriter contactsWriter =
+                                   new BufferedWriter(new FileWriter(contacts));
+                for (int i = 0; i < contactList.size(); i++) {
+                    saveContact(contactList.get(i), contactsWriter);
+                    contactsWriter.newLine();
+                }
+            } catch (IOException e) {
+                throw e;
+            }
+        }
+    }
+    private static void saveContact(Info[] contact, 
+                                    BufferedWriter contactsWriter) {
+        try {
+            for (int i = 0; i < contact.length; i++) {
+                if (i != contact.length - 1) {
+                    contactsWriter.write(contact[i].getInfo + SEPARATOR);
+                } else {
+                    contactsWriter.write(contact[i]);
+                }
+            }
+        } catch IOException e {
+            throw e;
+        }
     }
 }

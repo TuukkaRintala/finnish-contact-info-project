@@ -39,7 +39,7 @@ public class FirstName implements Info {
             System.out.println("Please give the id of the contact:");
             validInput = true;
             try {
-                addThis.setId(GetInputs.getInput());
+                setInfo(GetInputs.getInput());
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 validInput = false;
