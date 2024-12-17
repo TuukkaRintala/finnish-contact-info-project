@@ -38,14 +38,17 @@ public class Email implements Info {
     }
     public void inputInfo() {
         boolean validInput = false;
-        while (!validInput) {
-            System.out.println("Please give the email of the contact:");
-            validInput = true;
-            try {
-                setInfo(GetInputs.getInput());
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-                validInput = false;
+        boolean inputThis = GetInputs.yesOrNo("Input a street address? (y/n)");
+        if (inputThis) {
+            while (!validInput) {
+                System.out.println("Please give the email of the contact:");
+                validInput = true;
+                try {
+                    setInfo(GetInputs.getInput());
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                    validInput = false;
+                }
             }
         }
     }
