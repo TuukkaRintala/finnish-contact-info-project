@@ -70,10 +70,31 @@ public class TextFile {
         return parsedContact;
     }
     public static List<Info[]> updateFile(final File contacts, 
-                              final List<Info[]> contactList, final int index) {
-        Info[] updateThis = contactList.get(index - 1);
-        for(int i = 0; i < updateThis.length; i++) {
-            updateThis[i].inputInfo();
+                                          final List<Info[]> contactList) {
+        boolean validInput = false;
+        int index = 0;
+        if (contactList.size() != 0 ){
+            System.out.println("Give the index you wish to update.");
+            while(!validInput) {
+                validInput = true;
+                try {
+                    index = Integer.parseInt(GetInputs.getInput());
+                    if (index < 1 || index > contactList.size()) {
+                        validInput = false;
+                        System.out.println("Index out of range.");
+                    }
+                } catch (IllegalArgumentException e) {
+                    validInput = false;
+                    System.out.println("Please input an integer.");
+                }
+            }
+            Info[] updateThis = contactList.get(index - 1);
+            for(int i = 0; i < updateThis.length; i++) {
+                updateThis[i].inputInfo();
+            }
+            saveIntoFile(contacts, contactList);
+        } else {
+            System.out.println("No contacts to update.");
         }
         return contactList;
     }
@@ -89,6 +110,7 @@ public class TextFile {
             }
         }
         contactList.add(addThis);
+        saveIntoFile(contacts, contactList);
         return contactList;
     }
     public static boolean validPath(String path) {
@@ -111,6 +133,7 @@ public class TextFile {
                     saveContact(contactList.get(i), contactsWriter);
                     contactsWriter.newLine();
                 }
+                contactsWriter.close();
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }

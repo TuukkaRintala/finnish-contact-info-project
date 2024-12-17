@@ -17,11 +17,13 @@ public class GetInputs {
         System.out.println("Give a command. h for help.");
         while (!validInput) {
             input = C.readLine().trim();
-            if (Arrays.binarySearch(COMMANDS, input) < -1) {
-                validInput = true;
-            } else {
-                System.out.println("Command not recognised.");
+            for (int i = 0; i < COMMANDS.length; i++) {
+                if (COMMANDS[i].equalsIgnoreCase(input)) {
+                    return input;
+                }
             }
+            System.out.println("Command not recognised.");
+            
         }
         return input;
     }
@@ -42,20 +44,4 @@ public class GetInputs {
         }
         return false;
     }
-    /*
-    public static Contact addNewContact() {
-        boolean validInput = false;
-        Contact addThis = new Contact();
-        while (!validInput) {
-            System.out.println("Please give the id of the contact:");
-            validInput = true;
-            try {
-                addThis.setId(c.readLine().trim());
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-                validInput = false;
-            }
-        }
-    }
-    */
 }

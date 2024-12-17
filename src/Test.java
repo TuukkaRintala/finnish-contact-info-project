@@ -14,8 +14,9 @@ public class Test {
     public static void main(final String[] args) {
         final String regex = "^[a-zA-ZåäöÅÄÖ]+\\s[0-9a-zA-Z]+\\s\\d{5}\\s[a-zA-ZåäöÅÄÖ]+$";
         Pattern emailPattern = Pattern.compile(regex);
+        String ads = "Hämeenkatu 1 33100";
         Matcher emailMatcher = emailPattern.matcher("Hämeenkatu 1 33100 Tampere");
-        System.out.println(emailMatcher.matches());
+        System.out.println(ads.matches(regex));
         /*
         File contacts = new File("whatevs.csv");
         try {

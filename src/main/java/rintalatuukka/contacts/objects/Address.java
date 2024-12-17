@@ -66,7 +66,7 @@ public class Address implements Info {
     }
     public boolean validateStreet(String info) {
         final String regex = "^[([A-Z]|Å|Ä|Ö)][([a-z]|å|ä|ö)+]{2,50}" +
-                             "([ ]([1-9]|[1-9][0-9]){1,2}))" +
+                             "([ ]([1-9]|[1-9][0-9]){1,2})" +
                              "([ ][A-Z]([1-9]|[0][1-9]|[1-9][0-9]){1,2})??";
         Pattern streetPattern = Pattern.compile(regex);
         Matcher streetMatcher = streetPattern.matcher(info);

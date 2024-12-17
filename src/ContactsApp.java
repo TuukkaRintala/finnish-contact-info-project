@@ -38,14 +38,16 @@ public class ContactsApp {
         boolean successful = true;
         File contacts = new File(fileName);
         try {
-            contactList = TextFile.openContacts(contacts);
             successful = contacts.createNewFile();
+            contactList = TextFile.openContacts(contacts);
+            TextFile.saveIntoFile(contacts, contactList);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
         Display.displayContacts(contactList);
     }
     private static void parseInput(String input) {
+        File contacts = new File(fileName);
         if (input.equalsIgnoreCase(COMMANDS[0])) {
             help();
         } else if (input.equalsIgnoreCase(COMMANDS[1]) || 
@@ -76,9 +78,16 @@ public class ContactsApp {
                     fileName = path;
                     contactList = TextFile.openContacts(new File(path));
                 }
+                Display.displayContacts(contactList);
             } catch(NullPointerException e) {
                 System.out.println("You need to input a path.");
             }
+        } else if (input.equalsIgnoreCase(COMMANDS[4])) {
+            TextFile.updateFile(contacts, contactList);
+            Display.displayContacts(contactList);
+        } else if (input.equalsIgnoreCase(COMMANDS[5])) {
+            TextFile.appendFile(contacts, contactList);
+            Display.displayContacts(contactList);
         }
     }
     private static void help() {
