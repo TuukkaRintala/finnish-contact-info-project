@@ -15,11 +15,27 @@ import java.util.ArrayList;
  * This class deals with manipulating the contents of the CSV-file that stores
  * contact info.
  *
+ * This class contains methods that interpret the data from a CSV-file into a
+ * list of Info-object arrays and allows updating specific parts of that list,
+ * adding new information to that list and allows the overwriting of the data in
+ * that CSV-file with the data stored in the list.
+ *
  * @author Tuukka Rintala
  */
 
 public class TextFile {
+    // SEPARATOR is the character used to separate values in the CSV-file.
     private static final char SEPARATOR = ';';
+    /**
+     * This method takes the stored data in the argument, and parses it into a
+     * list of Info-object arrays.
+     *
+     * Firstly the data in CSV-file is stored in a String list. Then that data
+     * is parsed into a list of Info-object arrays.
+     *
+     * @param contacts is a File that determines where the contact data is.
+     * @return a list of Info-object arrays containing the data from the file.
+     */
     public static List<Info[]> openContacts(final File contacts) {
         boolean successful = true;
         List<String> commaSeparated = new ArrayList<>();
@@ -32,6 +48,17 @@ public class TextFile {
         List<Info[]> contactList = parseContactList(commaSeparated);
         return contactList;
     }
+    /**
+     * This method parses the String list read from a CSV-file into Info-objects
+     * stored into arrays nested in a list.
+     *
+     * Each String in the list is checked and we attempt to make them into an
+     * array of Info-objects. Then we add them to a list.
+     *
+     * @param contactList this argument contains contact information in a list
+     * of Strings.
+     * @return the information parsed into a list of Info-object arrays.
+     */
     private static List<Info[]> parseContactList(final List<String> contactList) {
         List<Info[]> parsedList = new ArrayList<>();
         int missingLines = 0; // TODO, after reading contacts, give the user a
@@ -46,6 +73,15 @@ public class TextFile {
         }
         return parsedList;
     }
+    /**
+     * This method parses the argument into an array of Info-objects.
+     *
+     * The argument is split by the SEPARATOR character, then each part of the
+     * String is attempted to be made into an Info object.
+     *
+     * @param start a String containing contact information separated by a char.
+     * @return an array of Info objects containing contact information.
+     */
     private static Info[] stringToContact(final String start) {
         final int contactInfoFields = 6;
         final String csvRegex = ("[" + SEPARATOR + "]");
@@ -69,6 +105,16 @@ public class TextFile {
         }
         return parsedContact;
     }
+    /**
+     * This method updates the information of a contact.
+     *
+     * 
+     *
+     * @param contacts the File describing the
+     * @param contactList a List containing contact information.
+     * @return a list of Info-object arrays containing the updated contact
+     * information.
+     */
     public static List<Info[]> updateFile(final File contacts, 
                                           final List<Info[]> contactList) {
         boolean validInput = false;

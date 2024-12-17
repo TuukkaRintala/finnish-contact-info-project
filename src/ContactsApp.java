@@ -1,5 +1,13 @@
-import main.java.rintalatuukka.contacts.util.*;
-import main.java.rintalatuukka.contacts.objects.*;
+import main.java.rintalatuukka.contacts.util.Display;
+import main.java.rintalatuukka.contacts.util.GetInputs;
+import main.java.rintalatuukka.contacts.util.TextFile;
+import main.java.rintalatuukka.contacts.objects.Info;
+import main.java.rintalatuukka.contacts.objects.Id;
+import main.java.rintalatuukka.contacts.objects.FirstName;
+import main.java.rintalatuukka.contacts.objects.LastName;
+import main.java.rintalatuukka.contacts.objects.PhoneNumber;
+import main.java.rintalatuukka.contacts.objects.Address;
+import main.java.rintalatuukka.contacts.objects.Email;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -14,14 +22,19 @@ public class ContactsApp {
     // fileName is a constant String containing the path of the text file to be
     // maintained.
     private static String fileName = "contacts.csv";
-    // IOERRORMSG is a constant String containing a message to be displayed in
-    // case of a caught IOException.
-    private static final String IOERRORMSG = "Error with the file name.";
+    // COMMANDS is an array containing the commands a user can input.
     private static final String[] COMMANDS = {"h", "e", "q", "o", "u", "a"};
+    // contactList is the list of all contacts the user wants to manipulate.
     private static List<Info[]> contactList = new ArrayList<>();
+    // quit is a boolean informing the program whether it should quit operation.
     private static boolean quit = false;
     /**
      * This method is called when the program is run.
+     *
+     * It opens a file using the openNewFile method, then asks for a command
+     * corresponding to the ones specified in COMMANDS and parses them using
+     * the method parseInput. This is repeated until the user inputs a quit
+     * command.
      *
      * @param args is an array of Strings containing arguments given when
      * running this app.
@@ -34,6 +47,14 @@ public class ContactsApp {
             parseInput(input);
         }
     }
+    /**
+     * This method opens a text file, reads and displays the contacts in that
+     * file
+     *
+     * A new file will be created if one doesn't exist, then the contacts will
+     * be stored in contactList and overwritten onto that text file if the user
+     * wishes.
+     */
     private static void openNewFile() {
         boolean successful = true;
         File contacts = new File(fileName);
@@ -46,10 +67,22 @@ public class ContactsApp {
         }
         Display.displayContacts(contactList);
     }
+    /**
+     * This method calls different segments of the program depending on the
+     * command it was given.
+     *
+     * The argument is compared against the COMMANDS array and executes help,
+     * quit/exit program, open a new file, update a contact or add a new
+     * contact.
+     *
+     * @param input is a String containing the validated command to be parsed.
+     */
     private static void parseInput(String input) {
         File contacts = new File(fileName);
+        // help
         if (input.equalsIgnoreCase(COMMANDS[0])) {
             help();
+        // quit
         } else if (input.equalsIgnoreCase(COMMANDS[1]) || 
                    input.equalsIgnoreCase(COMMANDS[2]) ) {
             boolean validInput = false;
@@ -64,8 +97,8 @@ public class ContactsApp {
                 }
             }
             quit = true;
+        // open
         } else if (input.equalsIgnoreCase(COMMANDS[3])) {
-            // TODO move asking for path to GetInputs?
             System.out.println("Give the path of the file you want to open:");
             try {
                 String path = GetInputs.getInput();
@@ -82,14 +115,20 @@ public class ContactsApp {
             } catch(NullPointerException e) {
                 System.out.println("You need to input a path.");
             }
+        // update
         } else if (input.equalsIgnoreCase(COMMANDS[4])) {
             TextFile.updateFile(contacts, contactList);
             Display.displayContacts(contactList);
+        // add
         } else if (input.equalsIgnoreCase(COMMANDS[5])) {
             TextFile.appendFile(contacts, contactList);
             Display.displayContacts(contactList);
         }
     }
+    /**
+     * This method prints a list of commands this program can execute and
+     * explanations for each of them.
+     */
     private static void help() {
         System.out.println("Commands:");
         System.out.println("h    | Prints out each command and what they do.");

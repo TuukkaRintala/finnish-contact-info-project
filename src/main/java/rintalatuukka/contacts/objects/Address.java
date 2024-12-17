@@ -11,7 +11,7 @@ import java.util.regex.Matcher;
  */
 
 public class Address implements Info {
-    private String info = "";
+    private String info = "..";
     private String street = "";
     private String zipCode = "";
     private String city = "";
@@ -85,6 +85,10 @@ public class Address implements Info {
         return cityMatcher.matches();
     }
     public void inputInfo() {
+        info = "";
+        street = "";
+        zipCode = "";
+        city = "";
         boolean validInput = false;
         boolean inputThis = GetInputs.yesOrNo("Input a street address? (y/n)");
         if (inputThis) {
@@ -96,6 +100,8 @@ public class Address implements Info {
                     validInput = true;
                 }
             }
+        } else {
+            info += ".";
         }
         inputThis = GetInputs.yesOrNo("Input a zip code? (y/n)");
         validInput = false;
@@ -107,6 +113,8 @@ public class Address implements Info {
                     validInput = true;
                 }
             }
+        } else {
+            info += ".";
         }
         validInput = false;
         inputThis = GetInputs.yesOrNo("Input a city? (y/n)");
