@@ -98,6 +98,7 @@ public class Address implements Info {
             }
         }
         inputThis = GetInputs.yesOrNo("Input a zip code? (y/n)");
+        validInput = false;
         if (inputThis) {
             while (!validInput) {
                 System.out.println("Please give the zip code of the contact:");
@@ -107,6 +108,7 @@ public class Address implements Info {
                 }
             }
         }
+        validInput = false;
         inputThis = GetInputs.yesOrNo("Input a city? (y/n)");
         if (inputThis) {
             while (!validInput) {

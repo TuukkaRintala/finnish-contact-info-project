@@ -39,7 +39,7 @@ public class FirstName implements Info {
     public void inputInfo() {
         boolean validInput = false;
         while (!validInput) {
-            System.out.println("Please give the id of the contact:");
+            System.out.println("Please give the first name of the contact:");
             validInput = true;
             try {
                 setInfo(GetInputs.getInput());

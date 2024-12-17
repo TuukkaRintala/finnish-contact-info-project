@@ -123,7 +123,7 @@ public class TextFile {
         return true;
     }
     public static void saveIntoFile(File contacts, List<Info[]> contactList) {
-        if (GetInputs.yesOrNo("Do you want to overwrite saved data?")) {
+        if (GetInputs.yesOrNo("Do you want to overwrite saved data? (y/n)")) {
             try {
                 Files.delete(contacts.toPath());
                 boolean successful = contacts.createNewFile();
