@@ -88,7 +88,7 @@ public class Display {
             for (int j = 0; j <= listLength - ((i + 1) + "").length(); j++) {
                 System.out.print(" ");
             }
-            System.out.println("|");
+            System.out.print("|");
             printContact(contactList.get(i));
         }
     }
@@ -104,8 +104,8 @@ public class Display {
     public static void printContact(final Info[] contact) {
         for (int i = 0; i < contact.length; i++) {
             if (i != contact.length -1) {
-                int spacesToMatch = contact[i].toString().length() -
-                                                                  contactMax[i];
+                int spacesToMatch = contactMax[i] -
+                                                 contact[i].toString().length();
                 System.out.print(contact[i]);
                 for (int j = 0; j < spacesToMatch; j++) {
                     System.out.print(" ");
@@ -130,11 +130,12 @@ public class Display {
         }
         for (int i = 0; i < HEADER.length; i++) {
             System.out.print("|");
-            int spacesToMatch = HEADER[i].length() - contactMax[i];
+            int spacesToMatch = contactMax[i] - HEADER[i].length();
             System.out.print(HEADER[i]);
             for (int j = 0; j < spacesToMatch; j++) {
                 System.out.print(" ");
             }
         }
+        System.out.println();
     }
 }

@@ -25,7 +25,8 @@ public class Email implements Info {
         if (validate(newInfo)) {
             info = newInfo;
         } else {
-            throw new IllegalArgumentException("Invalid email.");
+            System.out.println("Invalid email. Correct format is for example:" +
+                               "mikko.Pajula@gmail.com");
         }
     }
     public boolean validate(String info) {
@@ -38,7 +39,7 @@ public class Email implements Info {
     }
     public void inputInfo() {
         boolean validInput = false;
-        boolean inputThis = GetInputs.yesOrNo("Input a street address? (y/n)");
+        boolean inputThis = GetInputs.yesOrNo("Input a email? (y/n)");
         info = "";
         if (inputThis) {
             while (!validInput) {

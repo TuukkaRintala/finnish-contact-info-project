@@ -65,7 +65,8 @@ public class TextFile {
         // chance to stop the program before updating the csv.
         for (int i = 0; i < contactList.size(); i++) {
             try {
-                parsedList.add(stringToContact(contactList.get(i)));
+                Info[] addThis = stringToContact(contactList.get(i));
+                parsedList.add(addThis);
             } catch (IllegalArgumentException e) {
                 System.out.println("Line " + (i + 1) + e.getMessage());
                 missingLines++;

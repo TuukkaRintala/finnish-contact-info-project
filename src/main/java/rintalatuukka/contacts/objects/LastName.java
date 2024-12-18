@@ -31,7 +31,7 @@ public class LastName implements Info {
     public boolean validate(String info) {
         // The inclusion of nordic letters in the regex is from stackoverflow,
         // slightly modified: https://bit.ly/3ZJnEG9
-        final String regex = "^[([A-Z]|Å|Ä|Ö)][([a-z]|å|ä|ö)+]{2,50}";
+        final String regex = "^[([A-Z]|Å|Ä|Ö)][([a-z]|å|ä|ö)+]{1,50}$";
         Pattern namePattern = Pattern.compile(regex);
         Matcher nameMatcher = namePattern.matcher(info);
         return nameMatcher.matches();

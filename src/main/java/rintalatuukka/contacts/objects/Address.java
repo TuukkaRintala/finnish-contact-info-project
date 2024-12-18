@@ -59,6 +59,7 @@ public class Address implements Info {
     public void setCity(String newCity) {
         if (validateCity(newCity)) {
             city = newCity;
+            info += newCity;
         } else {
             System.out.println("Invalid city. Correct format is for" +
                                " example: Tampere.");
@@ -79,7 +80,7 @@ public class Address implements Info {
         return zipMatcher.matches();
     }
     public boolean validateCity(String info) {
-        final String regex = "^[([A-Z]|Å|Ä|Ö)][([a-z]|å|ä|ö)+]{2,50}";
+        final String regex = "^[([A-Z]|Å|Ä|Ö)][([a-z]|å|ä|ö)+]{1,50}$";
         Pattern cityPattern = Pattern.compile(regex);
         Matcher cityMatcher = cityPattern.matcher(info);
         return cityMatcher.matches();

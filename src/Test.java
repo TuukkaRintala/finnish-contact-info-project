@@ -11,11 +11,21 @@ import java.util.regex.Matcher;
 
 public class Test {
     public static void main(final String[] args) {
-        final String regex = "^[a-zA-ZåäöÅÄÖ]+\\s[0-9a-zA-Z]+\\s\\d{5}\\s[a-zA-ZåäöÅÄÖ]+$";
-        Pattern emailPattern = Pattern.compile(regex);
-        String ads = "Hämeenkatu 1 33100";
-        Matcher emailMatcher = emailPattern.matcher("Hämeenkatu 1 33100 Tampere");
-        System.out.println(ads.matches(regex));
+        /*
+        String newInfo = "Hämeenkatu 17.33800.Sodankylä";
+        String[] splitInfo = newInfo.split("[.]", 3);
+        try {
+            setStreet(splitInfo[0]);
+            setZipCode(splitInfo[1]);
+            setCity(splitInfo[2]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Address data formatted wrong. Address data " +
+                "should always contain three fields divided by a full stop .");
+        }
+        */
+        Address lol = new Address();
+        lol.validateCity("Sodankylä");
+        lol.setInfo("Hämeenkatu 17.33800.Sodankylä");
         /*
         File contacts = new File("whatevs.csv");
         try {
