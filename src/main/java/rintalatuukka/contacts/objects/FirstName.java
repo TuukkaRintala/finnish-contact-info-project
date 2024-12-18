@@ -8,13 +8,33 @@ import java.util.regex.Matcher;
 /**
  * This object contains the info for a finnish ID and methods to manipulate that
  * data.
+ *
+ * @author Tuukka Rintala
+ * {@inheritDoc}
  */
 
 public class FirstName implements Info {
+    // info contains the first name information we wish to store in this object.
     private String info = "";
+    /**
+     * This constructor is for creating empty FirstName objects and should be
+     * used with care.
+     *
+     * It should not pass validation in other areas of the program, so
+     * information should be added to it as soon as possible, either using
+     * setInfo or inputInfo.
+     */
     public FirstName() {
         super();
     }
+    /**
+     * This is a constructor which recieves its information in the argument.
+     *
+     * The information is stored using setInfo, so that it is validated and
+     * throws an exception if the data is invalid.
+     *
+     * @param startInfo a String containing a first name.
+     */
     public FirstName(String startInfo) {
         setInfo(startInfo);
     }
@@ -25,9 +45,22 @@ public class FirstName implements Info {
         if (validate(newInfo)) {
             info = newInfo;
         } else {
+            // Throw an exception because this information is not optional.
             throw new IllegalArgumentException("Invalid first name.");
         }
     }
+    /**
+     * This method validates if the argument is a correctly formatted first
+     * name.
+     *
+     * A regular expression is compiled to check if the character is an 
+     * uppercase letter (including ÅÄÖ) and that the rest are lower case letters
+     * and that the name isn't absurdly long. It is then matched against the
+     * argument.
+     *
+     * @param info a String containing the first name we wish to validate.
+     * @return a boolean denoting whether the argument was valid.
+     */
     public boolean validate(String info) {
         // The inclusion of nordic letters in the regex is from stackoverflow,
         // slightly modified: https://bit.ly/3ZJnEG9

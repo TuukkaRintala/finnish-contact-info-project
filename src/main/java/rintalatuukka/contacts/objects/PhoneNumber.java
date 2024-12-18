@@ -8,13 +8,34 @@ import java.util.regex.Matcher;
 /**
  * This object contains the info for a finnish ID and methods to manipulate that
  * data.
+ *
+ * @author Tuukka Rintala
+ * {@inheritDoc}
  */
 
 public class PhoneNumber implements Info {
+    // info contains the phone number information we wish to store in this
+    // object.
     private String info = "";
+    /**
+     * This constructor is for creating empty PhoneNumber objects and should be
+     * used with care.
+     *
+     * It should not pass validation in other areas of the program, so
+     * information should be added to it as soon as possible, either using
+     * setInfo or inputInfo.
+     */
     public PhoneNumber() {
         super();
     }
+    /**
+     * This is a constructor which recieves its information in the argument.
+     *
+     * The information is stored using setInfo, so that it is validated and
+     * throws an exception if the data is invalid.
+     *
+     * @param startInfo a String containing a phone number.
+     */
     public PhoneNumber(String startInfo) {
         setInfo(startInfo);
     }
@@ -25,9 +46,22 @@ public class PhoneNumber implements Info {
         if (validate(newInfo)) {
             info = newInfo;
         } else {
+            // Throw an exception because this information is not optional.
             throw new IllegalArgumentException("Invalid phone number.");
         }
     }
+    /**
+     * This method validates if the argument is a correctly formatted phone
+     * number.
+     *
+     * A regular expression is compiled to check if there is a country code at
+     * the start (it can be in brackets), and if the rest are numbers in a 
+     * correct amount, also parts of the phone number can be separated using
+     * '.',' ' or '-'. It is then matched against the argument.
+     *
+     * @param info a String containing the phone number we wish to validate.
+     * @return a boolean denoting whether the argument was valid.
+     */
     public boolean validate(String info) {
         // This regex is modified from https://ihateregex.io/expr/phone/ to
         // escape the characters properly in Java.
