@@ -108,9 +108,12 @@ public class TextFile {
     /**
      * This method updates the information of a contact.
      *
-     * 
+     * The user is asked to input the index they wish to update, then each Info-
+     * object at the specified index in the list is asked to run a method gets
+     * new information from the user. Then the list is overwritten onto the CSV.
+     * If there are no contacts in the list an error message is printed instead.
      *
-     * @param contacts the File describing the
+     * @param contacts the File storing the contact information.
      * @param contactList a List containing contact information.
      * @return a list of Info-object arrays containing the updated contact
      * information.
@@ -121,6 +124,7 @@ public class TextFile {
         int index = 0;
         if (contactList.size() != 0 ){
             System.out.println("Give the index you wish to update.");
+            // Getting a valid index
             while(!validInput) {
                 validInput = true;
                 try {
@@ -134,6 +138,8 @@ public class TextFile {
                     System.out.println("Please input an integer.");
                 }
             }
+            // Determining which contact to update and getting new information
+            // from the user
             Info[] updateThis = contactList.get(index - 1);
             for(int i = 0; i < updateThis.length; i++) {
                 updateThis[i].inputInfo();
@@ -144,6 +150,17 @@ public class TextFile {
         }
         return contactList;
     }
+    /**
+     * This method adds an array of contact information to the list.
+     *
+     * A new array of Info-objects is created, and each object in the array is
+     * used to store new information from the user. It is then added to the list
+     * and overwritten onto the CSV file.
+     *
+     * @param contacts the File storing the contact information.
+     * @param contactList a List containing contact information.
+     * @return a list of Info-object arrays with the added information array.
+     */
     public static List<Info[]> appendFile(final File contacts, 
                                           final List<Info[]> contactList) {
         Info[] addThis = {new Id(), new FirstName(), new LastName(),
@@ -159,6 +176,16 @@ public class TextFile {
         saveIntoFile(contacts, contactList);
         return contactList;
     }
+    /**
+     * This method checks if the given filepath can be read and written to.
+     *
+     * The path is checked to see if it can be read and then if it can be
+     * written to, if either is not possible the program returns false,
+     * otherwise it returns true.
+     *
+     * @param path a String containing the filepath we wish to examine.
+     * @return a boolean telling the program whether the path is read/writeable.
+     */
     public static boolean validPath(String path) {
         File checkThis = new File(path);
         if (!checkThis.canRead()) {
@@ -168,6 +195,19 @@ public class TextFile {
         }
         return true;
     }
+
+    /**
+     * This method overwrites the data from the list of contact information onto
+     * the CSV file.
+     *
+     * The method first asks the user if they wish to overwrite the data, then
+     * deletes the old data. Afterwards each contact in the list is written onto
+     * the CSV file on their own line, the information from the Info-objects
+     * separated by the SEPARATOR character.
+     *
+     * @param contacts the File storing the contact information.
+     * @param contactList a List containing contact information.
+     */
     public static void saveIntoFile(File contacts, List<Info[]> contactList) {
         if (GetInputs.yesOrNo("Do you want to overwrite saved data? (y/n)")) {
             try {
@@ -185,6 +225,19 @@ public class TextFile {
             }
         }
     }
+    /**
+     * This method writes the information from a single Info-object into a CSV-
+     * file.
+     *
+     * Each Info-object in the array is queried for their information and that
+     * information is written onto the given CSV file and separated using the
+     * SEPARATOR character.
+     *
+     * @param contact the array of Info objects whose info we want to write onto
+     * the CSV file.
+     * @param contactsWriter a BufferedWriter that is open in the CSV file we
+     * want to write to.
+     */
     private static void saveContact(Info[] contact, 
                                     BufferedWriter contactsWriter) {
         try {

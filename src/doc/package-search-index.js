@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"main.java.rintalatuukka.contacts.objects"},{"l":"main.java.rintalatuukka.contacts.util"}];updateSearchResults();

@@ -5,7 +5,6 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.ArrayList;
 import main.java.rintalatuukka.contacts.objects.*;
-import main.java.rintalatuukka.contacts.util.Validation;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
