@@ -1,6 +1,5 @@
 package main.java.rintalatuukka.contacts.objects;
 
-import main.java.rintalatuukka.contacts.objects.Info;
 import main.java.rintalatuukka.contacts.util.GetInputs;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -35,13 +34,13 @@ public class LastName implements Info {
      *
      * @param startInfo a String containing a last name.
      */
-    public LastName(String startInfo) {
+    public LastName(final String startInfo) {
         setInfo(startInfo);
     }
     public String getInfo() {
         return info;
     }
-    public void setInfo(String newInfo) {
+    public void setInfo(final String newInfo) {
         if (validate(newInfo)) {
             info = newInfo;
         } else {
@@ -52,20 +51,20 @@ public class LastName implements Info {
     /**
      * This method validates if the argument is a correctly formatted last name.
      *
-     * A regular expression is compiled to check if the character is an 
+     * A regular expression is compiled to check if the character is an
      * uppercase letter (including ÅÄÖ) and that the rest are lower case letters
      * and that the name isn't absurdly long. It is then matched against the
      * argument.
      *
-     * @param info a String containing the last name we wish to validate.
+     * @param newInfo a String containing the last name we wish to validate.
      * @return a boolean denoting whether the argument was valid.
      */
-    public boolean validate(String info) {
+    public boolean validate(final String newInfo) {
         // The inclusion of nordic letters in the regex is from stackoverflow,
         // slightly modified: https://bit.ly/3ZJnEG9
         final String regex = "^[([A-Z]|Å|Ä|Ö)][([a-z]|å|ä|ö)+]{1,50}$";
         Pattern namePattern = Pattern.compile(regex);
-        Matcher nameMatcher = namePattern.matcher(info);
+        Matcher nameMatcher = namePattern.matcher(newInfo);
         return nameMatcher.matches();
     }
     public void inputInfo() {

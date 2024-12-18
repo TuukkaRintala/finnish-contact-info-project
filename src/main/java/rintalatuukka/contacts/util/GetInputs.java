@@ -1,10 +1,9 @@
 package main.java.rintalatuukka.contacts.util;
 
 import java.io.Console;
-import java.util.Arrays;
 
 /**
- * This class is used to get inputs from the user and return them to other 
+ * This class is used to get inputs from the user and return them to other
  * Classes.
  *
  * The purpose of the methods in this class is to streamline other classes
@@ -24,22 +23,21 @@ public class GetInputs {
      * argument. If yes, we return that input, if not we print an error message
      * and take then next input and check it again.
      *
-     * @param COMMANDS an array of Strings containing acceptable commands.
+     * @param commands an array of Strings containing acceptable commands.
      * @return a String containing the validated command.
      */
-    public static String getValidCommand(String[] COMMANDS) {
+    public static String getValidCommand(final String[] commands) {
         boolean validInput = false;
         String input = "";
         System.out.println("Give a command. h for help.");
         while (!validInput) {
             input = C.readLine().trim();
-            for (int i = 0; i < COMMANDS.length; i++) {
-                if (COMMANDS[i].equalsIgnoreCase(input)) {
+            for (int i = 0; i < commands.length; i++) {
+                if (commands[i].equalsIgnoreCase(input)) {
                     return input;
                 }
             }
             System.out.println("Command not recognised.");
-            
         }
         return input;
     }
@@ -61,7 +59,7 @@ public class GetInputs {
      * @param question a String containing a yes or no question.
      * @return a boolean containing the answer to the argument.
      */
-    public static boolean yesOrNo(String question) {
+    public static boolean yesOrNo(final String question) {
         boolean validInput = false;
         String input = "";
         while (!validInput) {

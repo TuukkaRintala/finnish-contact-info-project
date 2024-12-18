@@ -2,12 +2,6 @@ import main.java.rintalatuukka.contacts.util.Display;
 import main.java.rintalatuukka.contacts.util.GetInputs;
 import main.java.rintalatuukka.contacts.util.TextFile;
 import main.java.rintalatuukka.contacts.objects.Info;
-import main.java.rintalatuukka.contacts.objects.Id;
-import main.java.rintalatuukka.contacts.objects.FirstName;
-import main.java.rintalatuukka.contacts.objects.LastName;
-import main.java.rintalatuukka.contacts.objects.PhoneNumber;
-import main.java.rintalatuukka.contacts.objects.Address;
-import main.java.rintalatuukka.contacts.objects.Email;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -77,16 +71,16 @@ public class ContactsApp {
      *
      * @param input is a String containing the validated command to be parsed.
      */
-    private static void parseInput(String input) {
+    private static void parseInput(final String input) {
         File contacts = new File(fileName);
         // help
-        if (input.equalsIgnoreCase(COMMANDS[0])) {
+        if (input.equalsIgnoreCase("h")) {
             help();
         // quit
-        } else if (input.equalsIgnoreCase(COMMANDS[1]) || 
-                   input.equalsIgnoreCase(COMMANDS[2]) ) {
+        } else if (input.equalsIgnoreCase("q")
+                   || input.equalsIgnoreCase("e")) {
             boolean validInput = false;
-            while(!validInput) {
+            while (!validInput) {
                 System.out.println("Are you sure you want to quit? (y/n)");
                 String response = GetInputs.getInput();
                 if (response.equalsIgnoreCase("y")) {
@@ -98,7 +92,7 @@ public class ContactsApp {
             }
             quit = true;
         // open
-        } else if (input.equalsIgnoreCase(COMMANDS[3])) {
+        } else if (input.equalsIgnoreCase("o")) {
             System.out.println("Give the path of the file you want to open:");
             try {
                 String path = GetInputs.getInput();
@@ -112,15 +106,15 @@ public class ContactsApp {
                     contactList = TextFile.openContacts(new File(path));
                 }
                 Display.displayContacts(contactList);
-            } catch(NullPointerException e) {
+            } catch (NullPointerException e) {
                 System.out.println("You need to input a path.");
             }
         // update
-        } else if (input.equalsIgnoreCase(COMMANDS[4])) {
+        } else if (input.equalsIgnoreCase("u")) {
             TextFile.updateFile(contacts, contactList);
             Display.displayContacts(contactList);
         // add
-        } else if (input.equalsIgnoreCase(COMMANDS[5])) {
+        } else if (input.equalsIgnoreCase("a")) {
             TextFile.appendFile(contacts, contactList);
             Display.displayContacts(contactList);
         }
@@ -133,9 +127,9 @@ public class ContactsApp {
         System.out.println("Commands:");
         System.out.println("h    | Prints out each command and what they do.");
         System.out.println("q, e | Quits/exits the program, aka stops it.");
-        System.out.println("o    | Opens a new or existing file. Queries you " +
-                           "for the file path of that file.");
+        System.out.println("o    | Opens a new or existing file. Queries you "
+                           + "for the file path of that file.");
         System.out.println("u    | Updates info for a contact you specify.");
         System.out.println("a    | Adds a new contact to the list.");
-   }
+    }
 }

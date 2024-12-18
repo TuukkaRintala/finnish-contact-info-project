@@ -8,6 +8,14 @@ import main.java.rintalatuukka.contacts.objects.*;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+/*
+import main.java.rintalatuukka.contacts.objects.Id;
+import main.java.rintalatuukka.contacts.objects.FirstName;
+import main.java.rintalatuukka.contacts.objects.LastName;
+import main.java.rintalatuukka.contacts.objects.PhoneNumber;
+import main.java.rintalatuukka.contacts.objects.Address;
+import main.java.rintalatuukka.contacts.objects.Email;
+*/
 
 public class Test {
     public static void main(final String[] args) {

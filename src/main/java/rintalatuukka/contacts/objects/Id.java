@@ -1,6 +1,5 @@
 package main.java.rintalatuukka.contacts.objects;
 
-import main.java.rintalatuukka.contacts.objects.Info;
 import main.java.rintalatuukka.contacts.util.GetInputs;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -34,13 +33,13 @@ public class Id implements Info {
      *
      * @param startInfo a String containing a finnish ID number.
      */
-    public Id(String startInfo) {
+    public Id(final String startInfo) {
         setInfo(startInfo);
     }
     public String getInfo() {
         return info;
     }
-    public void setInfo(String newInfo) {
+    public void setInfo(final String newInfo) {
         if (validate(newInfo)) {
             info = newInfo;
         } else {
@@ -57,16 +56,16 @@ public class Id implements Info {
      * the next three are a valid individual number and if the last character is
      * a valid control character. It is then matched against the argument.
      *
-     * @param info a String containing the finnish ID we wish to validate.
+     * @param newInfo a String containing the finnish ID we wish to validate.
      * @return a boolean denoting whether the argument was valid.
      */
-    public boolean validate(String info) {
+    public boolean validate(final String newInfo) {
         // This regex is from https://regex101.com/library/cIohyA, and has been
         // edited to include A-F and U-W as the century sign.
-        final String regex = "^(0[1-9]|[1-2][0-9]|3[0-1])(0[1-9]|1[0-2])[0-9]" +
-        "{2}[[A-F][U-Y]+-][0-9]{3}[A-z0-9]$";
+        final String regex = "^(0[1-9]|[1-2][0-9]|3[0-1])(0[1-9]|1[0-2])[0-9]"
+                             + "{2}[[A-F][U-Y]+-][0-9]{3}[A-z0-9]$";
         Pattern idPattern = Pattern.compile(regex);
-        Matcher idMatcher = idPattern.matcher(info);
+        Matcher idMatcher = idPattern.matcher(newInfo);
         return idMatcher.matches();
     }
     public void inputInfo() {

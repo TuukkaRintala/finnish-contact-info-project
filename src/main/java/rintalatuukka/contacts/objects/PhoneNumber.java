@@ -1,6 +1,5 @@
 package main.java.rintalatuukka.contacts.objects;
 
-import main.java.rintalatuukka.contacts.objects.Info;
 import main.java.rintalatuukka.contacts.util.GetInputs;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -36,13 +35,13 @@ public class PhoneNumber implements Info {
      *
      * @param startInfo a String containing a phone number.
      */
-    public PhoneNumber(String startInfo) {
+    public PhoneNumber(final String startInfo) {
         setInfo(startInfo);
     }
     public String getInfo() {
         return info;
     }
-    public void setInfo(String newInfo) {
+    public void setInfo(final String newInfo) {
         if (validate(newInfo)) {
             info = newInfo;
         } else {
@@ -55,20 +54,20 @@ public class PhoneNumber implements Info {
      * number.
      *
      * A regular expression is compiled to check if there is a country code at
-     * the start (it can be in brackets), and if the rest are numbers in a 
+     * the start (it can be in brackets), and if the rest are numbers in a
      * correct amount, also parts of the phone number can be separated using
      * '.',' ' or '-'. It is then matched against the argument.
      *
-     * @param info a String containing the phone number we wish to validate.
+     * @param newInfo a String containing the phone number we wish to validate.
      * @return a boolean denoting whether the argument was valid.
      */
-    public boolean validate(String info) {
+    public boolean validate(final String newInfo) {
         // This regex is modified from https://ihateregex.io/expr/phone/ to
         // escape the characters properly in Java.
-        final String regex = "^[+]?[(]?[0-9]{3}[)]?[-\s\\.]?[0-9]{3}[-\s\\.]?" +
-                             "[0-9]{4,6}$";
+        final String regex = "^[+]?[(]?[0-9]{3}[)]?[-\s\\.]?[0-9]{3}[-\s\\.]?"
+                             + "[0-9]{4,6}$";
         Pattern phonePattern = Pattern.compile(regex);
-        Matcher phoneMatcher = phonePattern.matcher(info);
+        Matcher phoneMatcher = phonePattern.matcher(newInfo);
         return phoneMatcher.matches();
     }
     public void inputInfo() {

@@ -1,6 +1,5 @@
 package main.java.rintalatuukka.contacts.objects;
 
-import main.java.rintalatuukka.contacts.objects.Info;
 import main.java.rintalatuukka.contacts.util.GetInputs;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -30,19 +29,19 @@ public class Email implements Info {
      *
      * @param startInfo a String containing an email.
      */
-    public Email(String startInfo) {
+    public Email(final String startInfo) {
         setInfo(startInfo);
     }
     public String getInfo() {
         return info;
     }
-    public void setInfo(String newInfo) {
+    public void setInfo(final String newInfo) {
         if (validate(newInfo)) {
             info = newInfo;
         } else {
             // Don't throw an exception because this information is optional.
-            System.out.println("Invalid email. Correct format is for example:" +
-                               "mikko.Pajula@gmail.com");
+            System.out.println("Invalid email. Correct format is for example:"
+                               + "mikko.Pajula@gmail.com");
         }
     }
     /**
@@ -51,20 +50,20 @@ public class Email implements Info {
      * A regular expression is compiled to check that the first or last
      * character isn't a '.', the first part consists of letters or certain
      * other characters(-_.), then there should be an @ character followed by
-     * letters and at least one dot followed by letters. It is then matched 
+     * letters and at least one dot followed by letters. It is then matched
      * against the argument.
      *
-     * @param info a String containing the email we wish to validate.
+     * @param newInfo a String containing the email we wish to validate.
      * @return a boolean denoting whether the argument was valid.
      */
-    public boolean validate(String info) {
+    public boolean validate(final String newInfo) {
         // This regex is from https://regex101.com/library/SOgUIV. Escaped some
         // characters properly for Java.
-        final String regex = "^((?!\\.)[([A-ZÅÄÖa-zåäö])\\-_.]*[^.])(@\\w+)" +
-                             "(\\.([A-ZÅÄÖa-zåäö])+(\\.([A-ZÅÄÖa-zåäö])+)?" +
-                             "[^.\\W])$";
+        final String regex = "^((?!\\.)[([A-ZÅÄÖa-zåäö])\\-_.]*[^.])(@\\w+)"
+                             + "(\\.([A-ZÅÄÖa-zåäö])+(\\.([A-ZÅÄÖa-zåäö])+)?"
+                             + "[^.\\W])$";
         Pattern emailPattern = Pattern.compile(regex);
-        Matcher emailMatcher = emailPattern.matcher(info);
+        Matcher emailMatcher = emailPattern.matcher(newInfo);
         return emailMatcher.matches();
     }
     public void inputInfo() {

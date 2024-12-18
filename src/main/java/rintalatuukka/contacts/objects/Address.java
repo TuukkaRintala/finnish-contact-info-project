@@ -1,6 +1,5 @@
 package main.java.rintalatuukka.contacts.objects;
 
-import main.java.rintalatuukka.contacts.objects.Info;
 import main.java.rintalatuukka.contacts.util.GetInputs;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -38,13 +37,13 @@ public class Address implements Info {
      * @param startInfo a String containing a finnish address, with the street
      * address, zipcode and city separated by a '.'.
      */
-    public Address(String startInfo) {
+    public Address(final String startInfo) {
         setInfo(startInfo);
     }
     public String getInfo() {
         return info;
     }
-    public void setInfo(String newInfo) {
+    public void setInfo(final String newInfo) {
         String[] splitInfo = newInfo.split("[.]", 3);
         info = "";
         try {
@@ -52,8 +51,9 @@ public class Address implements Info {
             setZipCode(splitInfo[1], true);
             setCity(splitInfo[2], true);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Address data formatted wrong. Address data " +
-                "should always contain three fields divided by a full stop .");
+            System.out.println("Address data formatted wrong. Address data "
+                               + "should always contain three fields divided "
+                               + "by a full stop .");
         }
     }
     /**
@@ -61,14 +61,16 @@ public class Address implements Info {
      * separate from zip code and city.
      *
      * @param newStreet a String containing the new street address.
+     * @param constructor a boolean that informs the method if its being run
+     * from a constructor.
      */
-    public void setStreet(String newStreet, boolean constructor) {
+    public void setStreet(final String newStreet, final boolean constructor) {
         if (validateStreet(newStreet)) {
             street = newStreet;
             info += newStreet;
         } else if (!constructor) {
-            System.out.println("Invalid street address. Correct format is for" +
-                               " example: Hämeenkatu 12 B4.");
+            System.out.println("Invalid street address. Correct format is for"
+                               + " example: Hämeenkatu 12 B4.");
         }
         info += ".";
     }
@@ -77,14 +79,16 @@ public class Address implements Info {
      *  from the street address and city.
      *
      * @param newZip a String containing the new zip code.
+     * @param constructor a boolean that informs the method if its being run
+     * from a constructor.
      */
-    public void setZipCode(String newZip, boolean constructor) {
+    public void setZipCode(final String newZip, final boolean constructor) {
         if (validateZip(newZip)) {
             zipCode = newZip;
             info += newZip;
         } else if (!constructor) {
-            System.out.println("Invalid zip code. Correct format is for" +
-                               " example: 33800.");
+            System.out.println("Invalid zip code. Correct format is for"
+                               + " example: 33800.");
         }
         info += ".";
     }
@@ -93,67 +97,70 @@ public class Address implements Info {
      * is the last value in this object.
      *
      * @param newCity a String containing the new city.
+     * @param constructor a boolean that informs the method if its being run
+     * from a constructor.
      */
-    public void setCity(String newCity, boolean constructor) {
+    public void setCity(final String newCity, final boolean constructor) {
         if (validateCity(newCity)) {
             city = newCity;
             info += newCity;
         } else if (!constructor) {
             // Don't throw an exception because this information is optional.
-            System.out.println("Invalid city. Correct format is for" +
-                               " example: Tampere.");
+            System.out.println("Invalid city. Correct format is for example:"
+                               + " Tampere.");
         }
     }
     /**
-     * This method validates if the argument is a correctly formatted street 
+     * This method validates if the argument is a correctly formatted street
      * address.
      *
      * A regular expression is compiled to check that the first letter is
      * capitalised, and the rest of that word is not and isn't too long, the
-     * next part is the street number and can be up to three numbers long. 
+     * next part is the street number and can be up to three numbers long.
      * Lastly there is an option to include an apartment number that includes
      * your staircase. It is then matched against the argument.
      *
-     * @param info a String containing the street address we wish to validate.
+     * @param newInfo a String containing the street address we wish to
+     * validate.
      * @return a boolean denoting whether the argument was valid.
      */
-    public boolean validateStreet(String info) {
-        final String regex = "^[([A-Z]|Å|Ä|Ö)][([a-z]|å|ä|ö)+]{1,50}" +
-                             "([ ]([1-9]|[1-9][0-9]|[1-9][0-9][0-9]){1,3})" +
-                             "([ ][A-Z]([1-9]|[0][1-9]|[1-9][0-9]){1,2})??";
+    public boolean validateStreet(final String newInfo) {
+        final String regex = "^[([A-Z]|Å|Ä|Ö)][([a-z]|å|ä|ö)+]{1,50}"
+                             + "([ ]([1-9]|[1-9][0-9]|[1-9][0-9][0-9]){1,3})"
+                             + "([ ][A-Z]([1-9]|[0][1-9]|[1-9][0-9]){1,2})??";
         Pattern streetPattern = Pattern.compile(regex);
-        Matcher streetMatcher = streetPattern.matcher(info);
+        Matcher streetMatcher = streetPattern.matcher(newInfo);
         return streetMatcher.matches();
     }
     /**
      * This method validates if the argument is a correctly formatted zip code.
      *
-     * A regular expression is compiled to check if there are 5 numbers.It is 
+     * A regular expression is compiled to check if there are 5 numbers.It is
      * then matched against the argument.
      *
-     * @param info a String containing the zip code§ we wish to validate.
+     * @param newInfo a String containing the zip code§ we wish to validate.
      * @return a boolean denoting whether the argument was valid.
      */
-    public boolean validateZip(String info) {
+    public boolean validateZip(final String newInfo) {
         final String regex = "^[0-9]{5}$";
         Pattern zipPattern = Pattern.compile(regex);
-        Matcher zipMatcher = zipPattern.matcher(info);
+        Matcher zipMatcher = zipPattern.matcher(newInfo);
         return zipMatcher.matches();
     }
     /**
      * This method validates if the argument is a correctly formatted city.
      *
      * A regular expression is compiled to check that the first letter is
-     * capitalised and that it isn't too long. It is then matched against the 
+     * capitalised and that it isn't too long. It is then matched against the
      * argument.
      *
-     * @param info a String containing the last name we wish to validate.
+     * @param newInfo a String containing the last name we wish to validate.
      * @return a boolean denoting whether the argument was valid.
      */
-    public boolean validateCity(String info) {
+    public boolean validateCity(final String newInfo) {
         final String regex = "^[([A-Z]|Å|Ä|Ö)][([a-z]|å|ä|ö)+]{1,50}$";
         Pattern cityPattern = Pattern.compile(regex);
-        Matcher cityMatcher = cityPattern.matcher(info);
+        Matcher cityMatcher = cityPattern.matcher(newInfo);
         return cityMatcher.matches();
     }
     public void inputInfo() {
@@ -168,8 +175,8 @@ public class Address implements Info {
         boolean inputThis = GetInputs.yesOrNo("Input a street address? (y/n)");
         if (inputThis) {
             while (!validInput) {
-                System.out.println("Please give the street address of the" +
-                                   " contact:");
+                System.out.println("Please give the street address of the"
+                                   + " contact:");
                 setStreet(GetInputs.getInput(), false);
                 if (!street.equals("")) {
                     validInput = true;
@@ -204,14 +211,14 @@ public class Address implements Info {
         }
     }
     public String toString() {
-        String info = "";
+        String display = "";
         if (!street.equals("")) {
-            info += street + " ";
+            display += street + " ";
         }
         if (!zipCode.equals("")) {
-            info += zipCode + " ";
+            display += zipCode + " ";
         }
-        info += city;
-        return info;
+        display += city;
+        return display;
     }
 }

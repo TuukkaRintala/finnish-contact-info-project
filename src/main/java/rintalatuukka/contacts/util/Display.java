@@ -1,8 +1,7 @@
 package main.java.rintalatuukka.contacts.util;
 
-import main.java.rintalatuukka.contacts.objects.*;
+import main.java.rintalatuukka.contacts.objects.Info;
 import java.util.List;
-import java.util.ArrayList;
 /**
  * This is a class that contains methods related to displaying the contents of
  * the contact info list.
@@ -22,9 +21,7 @@ public class Display {
     private static int listLength = 1;
     // contactMax is an array of ints containing the lengths of the longest
     // Strings of Info in the contact list.
-    private static int[] contactMax = {HEADER[0].length(), HEADER[1].length(),
-                                       HEADER[2].length(), HEADER[3].length(),
-                                       HEADER[4].length(), HEADER[5].length()};
+    private static int[] contactMax = new int[HEADER.length];
     /**
      * This method prints out the contents of a contact list.
      *
@@ -36,6 +33,9 @@ public class Display {
      * objects used to find contact information.
      */
     public static void displayContacts(final List<Info[]> contactList) {
+        for (int i = 0; i < contactMax.length; i++) {
+            contactMax[i] = HEADER[i].length();
+        }
         findMaxContactList(contactList);
         listLength = (contactList.size() + "").length();
         printHeader();
@@ -103,9 +103,9 @@ public class Display {
      */
     public static void printContact(final Info[] contact) {
         for (int i = 0; i < contact.length; i++) {
-            if (i != contact.length -1) {
-                int spacesToMatch = contactMax[i] -
-                                                 contact[i].toString().length();
+            if (i != contact.length - 1) {
+                int spacesToMatch = contactMax[i]
+                                               - contact[i].toString().length();
                 System.out.print(contact[i]);
                 for (int j = 0; j < spacesToMatch; j++) {
                     System.out.print(" ");

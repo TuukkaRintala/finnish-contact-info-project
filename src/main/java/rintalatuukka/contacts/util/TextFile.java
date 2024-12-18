@@ -1,12 +1,17 @@
 package main.java.rintalatuukka.contacts.util;
 
-import main.java.rintalatuukka.contacts.objects.*;
+import main.java.rintalatuukka.contacts.objects.Info;
+import main.java.rintalatuukka.contacts.objects.Id;
+import main.java.rintalatuukka.contacts.objects.FirstName;
+import main.java.rintalatuukka.contacts.objects.LastName;
+import main.java.rintalatuukka.contacts.objects.PhoneNumber;
+import main.java.rintalatuukka.contacts.objects.Address;
+import main.java.rintalatuukka.contacts.objects.Email;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.nio.file.Files;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.ArrayList;
@@ -40,7 +45,7 @@ public class TextFile {
         boolean successful = true;
         List<String> commaSeparated = new ArrayList<>();
         try {
-            commaSeparated = 
+            commaSeparated =
                 Files.readAllLines(contacts.toPath(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -59,7 +64,8 @@ public class TextFile {
      * of Strings.
      * @return the information parsed into a list of Info-object arrays.
      */
-    private static List<Info[]> parseContactList(final List<String> contactList) {
+    private static List<Info[]> parseContactList(
+                                               final List<String> contactList) {
         List<Info[]> parsedList = new ArrayList<>();
         int missingLines = 0; // TODO, after reading contacts, give the user a
         // chance to stop the program before updating the csv.
@@ -100,8 +106,7 @@ public class TextFile {
                 parsedContact[4] = new Address(separated[4]);
                 parsedContact[5] = new Email(separated[5]);
             } catch (IllegalArgumentException e) {
-                throw e; // fucks up the last two being optional unless you 
-                // don't throw errors from them?
+                throw e;
             }
         }
         return parsedContact;
@@ -119,14 +124,14 @@ public class TextFile {
      * @return a list of Info-object arrays containing the updated contact
      * information.
      */
-    public static List<Info[]> updateFile(final File contacts, 
+    public static List<Info[]> updateFile(final File contacts,
                                           final List<Info[]> contactList) {
         boolean validInput = false;
         int index = 0;
-        if (contactList.size() != 0 ){
+        if (contactList.size() != 0) {
             System.out.println("Give the index you wish to update.");
             // Getting a valid index
-            while(!validInput) {
+            while (!validInput) {
                 validInput = true;
                 try {
                     index = Integer.parseInt(GetInputs.getInput());
@@ -142,7 +147,7 @@ public class TextFile {
             // Determining which contact to update and getting new information
             // from the user
             Info[] updateThis = contactList.get(index - 1);
-            for(int i = 0; i < updateThis.length; i++) {
+            for (int i = 0; i < updateThis.length; i++) {
                 updateThis[i].inputInfo();
             }
             saveIntoFile(contacts, contactList);
@@ -162,10 +167,10 @@ public class TextFile {
      * @param contactList a List containing contact information.
      * @return a list of Info-object arrays with the added information array.
      */
-    public static List<Info[]> appendFile(final File contacts, 
+    public static List<Info[]> appendFile(final File contacts,
                                           final List<Info[]> contactList) {
         Info[] addThis = {new Id(), new FirstName(), new LastName(),
-                              new PhoneNumber(), new Address(), new Email()};
+                          new PhoneNumber(), new Address(), new Email()};
         for (int i = 0; i < addThis.length; i++) {
             try {
                 addThis[i].inputInfo();
@@ -187,7 +192,7 @@ public class TextFile {
      * @param path a String containing the filepath we wish to examine.
      * @return a boolean telling the program whether the path is read/writeable.
      */
-    public static boolean validPath(String path) {
+    public static boolean validPath(final String path) {
         File checkThis = new File(path);
         if (!checkThis.canRead()) {
             return false;
@@ -209,7 +214,8 @@ public class TextFile {
      * @param contacts the File storing the contact information.
      * @param contactList a List containing contact information.
      */
-    public static void saveIntoFile(File contacts, List<Info[]> contactList) {
+    public static void saveIntoFile(final File contacts,
+                                    final List<Info[]> contactList) {
         if (GetInputs.yesOrNo("Do you want to overwrite saved data? (y/n)")) {
             try {
                 Files.delete(contacts.toPath());
@@ -239,8 +245,8 @@ public class TextFile {
      * @param contactsWriter a BufferedWriter that is open in the CSV file we
      * want to write to.
      */
-    private static void saveContact(Info[] contact, 
-                                    BufferedWriter contactsWriter) {
+    private static void saveContact(final Info[] contact,
+                                    final BufferedWriter contactsWriter) {
         try {
             for (int i = 0; i < contact.length; i++) {
                 if (i != contact.length - 1) {
