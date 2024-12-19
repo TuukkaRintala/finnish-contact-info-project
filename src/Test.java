@@ -31,9 +31,7 @@ public class Test {
                 "should always contain three fields divided by a full stop .");
         }
         */
-        Address lol = new Address();
-        lol.validateCity("Sodankylä");
-        lol.setInfo("Hämeenkatu 17.33800.Sodankylä");
+        System.out.println(new String() + ".");
         /*
         File contacts = new File("whatevs.csv");
         try {

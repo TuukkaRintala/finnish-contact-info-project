@@ -17,7 +17,8 @@ public class ContactsApp {
     // maintained.
     private static String fileName = "contacts.csv";
     // COMMANDS is an array containing the commands a user can input.
-    private static final String[] COMMANDS = {"h", "e", "q", "o", "u", "a"};
+    private static final String[] COMMANDS = {"h", "e", "q", "o", "u", "a",
+                                              "d"};
     // contactList is the list of all contacts the user wants to manipulate.
     private static List<Info[]> contactList = new ArrayList<>();
     // quit is a boolean informing the program whether it should quit operation.
@@ -116,6 +117,10 @@ public class ContactsApp {
         // add
         } else if (input.equalsIgnoreCase("a")) {
             TextFile.appendFile(contacts, contactList);
+            Display.displayContacts(contactList);
+        // delete
+        } else if (input.equalsIgnoreCase("d")) {
+            TextFile.deleteContact(contacts, contactList);
             Display.displayContacts(contactList);
         }
     }

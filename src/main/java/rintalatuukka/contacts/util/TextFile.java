@@ -7,6 +7,7 @@ import main.java.rintalatuukka.contacts.objects.LastName;
 import main.java.rintalatuukka.contacts.objects.PhoneNumber;
 import main.java.rintalatuukka.contacts.objects.Address;
 import main.java.rintalatuukka.contacts.objects.Email;
+import main.java.rintalatuukka.contacts.util.Display;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
@@ -147,10 +148,16 @@ public class TextFile {
             // Determining which contact to update and getting new information
             // from the user
             Info[] updateThis = contactList.get(index - 1);
-            for (int i = 0; i < updateThis.length; i++) {
-                updateThis[i].inputInfo();
+            List<Info[]> displayList = new ArrayList<>();
+            displayList.add(updateThis);
+            Display.displayContacts(displayList);
+            boolean update = GetInputs.yesOrNo("Update this contact? (y/n)");
+            if (update) {
+                for (int i = 0; i < updateThis.length; i++) {
+                    updateThis[i].inputInfo();
+                }
+                saveIntoFile(contacts, contactList);
             }
-            saveIntoFile(contacts, contactList);
         } else {
             System.out.println("No contacts to update.");
         }
@@ -180,6 +187,52 @@ public class TextFile {
         }
         contactList.add(addThis);
         saveIntoFile(contacts, contactList);
+        return contactList;
+    }
+    /**
+     * This method asks the user for an index and deletes a contact from that
+     * index from the contact list.
+     *
+     * 
+     *
+     * @param contacts is the CSV file where we store the contacts.
+     * @param contactList is a list of Info-object arrays containing finnish
+     * contact information.
+     */
+    public static List<Info[]> deleteContact(final File contacts,
+                                     final List<Info[]> contactList) {
+        boolean validInput = false;
+        int index = 0;
+        if (contactList.size() != 0) {
+            System.out.println("Give the index you wish to delete.");
+            // Getting a valid index
+            while (!validInput) {
+                validInput = true;
+                try {
+                    index = Integer.parseInt(GetInputs.getInput());
+                    if (index < 1 || index > contactList.size()) {
+                        validInput = false;
+                        System.out.println("Index out of range.");
+                    }
+                } catch (IllegalArgumentException e) {
+                    validInput = false;
+                    System.out.println("Please input an integer.");
+                }
+            }
+            // Determining which contact to delete and getting new information
+            // from the user
+            Info[] deleteThis = contactList.get(index - 1);
+            List<Info[]> displayList = new ArrayList<>();
+            displayList.add(deleteThis);
+            Display.displayContacts(displayList);
+            boolean delete = GetInputs.yesOrNo("Delete this contact? (y/n)");
+            if (delete) {
+                deleteThis = contactList.remove(index - 1);
+                saveIntoFile(contacts, contactList);
+            }
+        } else {
+            System.out.println("No contacts to update.");
+        }
         return contactList;
     }
     /**

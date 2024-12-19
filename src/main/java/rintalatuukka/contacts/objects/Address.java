@@ -45,7 +45,6 @@ public class Address implements Info {
     }
     public void setInfo(final String newInfo) {
         String[] splitInfo = newInfo.split("[.]", 3);
-        info = "";
         try {
             setStreet(splitInfo[0], true);
             setZipCode(splitInfo[1], true);
@@ -57,6 +56,13 @@ public class Address implements Info {
         }
     }
     /**
+     * This method updates the information to contain the current street
+     * address, zip code and city separated by dots.
+     */
+    public void updateInfo() {
+        info = street + "." + zipCode + "." + city;
+    }
+    /**
      * This method sets the street address of this object. Also adds a dot to
      * separate from zip code and city.
      *
@@ -65,14 +71,14 @@ public class Address implements Info {
      * from a constructor.
      */
     public void setStreet(final String newStreet, final boolean constructor) {
+        street = "";
         if (validateStreet(newStreet)) {
             street = newStreet;
-            info += newStreet;
         } else if (!constructor) {
             System.out.println("Invalid street address. Correct format is for"
                                + " example: Hämeenkatu 12 B4.");
         }
-        info += ".";
+        updateInfo();
     }
     /**
      * This method sets the zip code of this object. Also adds a dot to separate
@@ -83,14 +89,14 @@ public class Address implements Info {
      * from a constructor.
      */
     public void setZipCode(final String newZip, final boolean constructor) {
+        zipCode = "";
         if (validateZip(newZip)) {
             zipCode = newZip;
-            info += newZip;
         } else if (!constructor) {
             System.out.println("Invalid zip code. Correct format is for"
                                + " example: 33800.");
         }
-        info += ".";
+        updateInfo();
     }
     /**
      * This method sets the city of this object. Does not add a dot because it
@@ -101,14 +107,15 @@ public class Address implements Info {
      * from a constructor.
      */
     public void setCity(final String newCity, final boolean constructor) {
+        city = "";
         if (validateCity(newCity)) {
             city = newCity;
-            info += newCity;
         } else if (!constructor) {
             // Don't throw an exception because this information is optional.
             System.out.println("Invalid city. Correct format is for example:"
                                + " Tampere.");
         }
+        updateInfo();
     }
     /**
      * This method validates if the argument is a correctly formatted street
@@ -182,6 +189,8 @@ public class Address implements Info {
                     validInput = true;
                 }
             }
+        // Adding a dot even if no street address is present, so that import
+        // works later.
         } else {
             info += ".";
         }
@@ -195,6 +204,8 @@ public class Address implements Info {
                     validInput = true;
                 }
             }
+        // Adding a dot even if no zip code is present, so that import works
+        // later.
         } else {
             info += ".";
         }

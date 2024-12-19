@@ -59,9 +59,9 @@ public class Email implements Info {
     public boolean validate(final String newInfo) {
         // This regex is from https://regex101.com/library/SOgUIV. Escaped some
         // characters properly for Java.
-        final String regex = "^((?!\\.)[([A-ZÅÄÖa-zåäö])\\-_.]*[^.])(@\\w+)"
-                             + "(\\.([A-ZÅÄÖa-zåäö])+(\\.([A-ZÅÄÖa-zåäö])+)?"
-                             + "[^.\\W])$";
+        final String regex = "^((?!\\.)[([A-ZÅÄÖa-zåäö])\\-_.]*[^.])"
+                             + "(@[A-ZÅÄÖa-zåäö]+)(\\.([A-ZÅÄÖa-zåäö])+"
+                             + "(\\.([A-ZÅÄÖa-zåäö])+)?[^.\\W])$";
         Pattern emailPattern = Pattern.compile(regex);
         Matcher emailMatcher = emailPattern.matcher(newInfo);
         return emailMatcher.matches();
@@ -73,12 +73,9 @@ public class Email implements Info {
         if (inputThis) {
             while (!validInput) {
                 System.out.println("Please give the email of the contact:");
-                validInput = true;
-                try {
-                    setInfo(GetInputs.getInput());
-                } catch (IllegalArgumentException e) {
-                    System.out.println(e.getMessage());
-                    validInput = false;
+                setInfo(GetInputs.getInput());
+                if (info != "") {
+                    validInput = true;
                 }
             }
         }
