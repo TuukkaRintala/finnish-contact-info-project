@@ -144,5 +144,6 @@ public class ContactsApp {
                            + "for the file path of that file.");
         System.out.println("u    | Updates info for a contact you specify.");
         System.out.println("a    | Adds a new contact to the list.");
+        System.out.println("d    | Deletes an existing contact from the list.");
     }
 }
