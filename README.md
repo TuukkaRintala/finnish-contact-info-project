@@ -7,7 +7,7 @@ The program supports creating, reading, updating and deleting finnish contact in
 Download the code, unzip it and navigate to the /src folder in a terminal and use the command `javac ContactsApp.java`. You must have Java JDK 21 or later installed.
 Now you can run the program from the /src folder in a terminal using the command `java ContactsApp`.
 ## Running the program
-Upon opening the program, it will import data or open a new CSV-file at the path specified in the code. By default, it is contacts.csv and it can be changed here: ![](https://imgur.com/a/i26m226)
+Upon opening the program, it will import data or open a new CSV-file at the path specified in the code. By default, it is contacts.csv and it can be changed here: ![asd](https://imgur.com/a/i26m226)
 # Code style
 I am using the Sun Code Convention for Java.
 # Credits
