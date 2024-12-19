@@ -52,7 +52,8 @@ public class Address implements Info {
         return info;
     }
     public void setInfo(final String newInfo) {
-        String[] splitInfo = newInfo.split("[.]");
+        final int fields = 3;
+        String[] splitInfo = newInfo.split("[.]", fields);
         try {
             setStreet(splitInfo[0], true);
             setZipCode(splitInfo[1], true);

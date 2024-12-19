@@ -31,7 +31,7 @@ public class Test {
                 "should always contain three fields divided by a full stop .");
         }
         */
-        System.out.println(new String() + ".");
+        System.out.println(new String("..").split("[.]", 3).length);
         /*
         File contacts = new File("whatevs.csv");
         try {
