@@ -91,6 +91,12 @@ public class TextFile {
      * @return an array of Info objects containing contact information.
      */
     private static Info[] stringToContact(final String start) {
+        final int id = 0;
+        final int firstName = 1;
+        final int lastName = 2;
+        final int phoneNumber = 3;
+        final int address = 4;
+        final int email = 5;
         final int contactInfoFields = 6;
         final String csvRegex = ("[" + SEPARATOR + "]");
         Info[] parsedContact = new Info[contactInfoFields];
@@ -100,12 +106,12 @@ public class TextFile {
                   "contains too few arguments, contents discarded");
         } else {
             try {
-                parsedContact[0] = new Id(separated[0]);
-                parsedContact[1] = new FirstName(separated[1]);
-                parsedContact[2] = new LastName(separated[2]);
-                parsedContact[3] = new PhoneNumber(separated[3]);
-                parsedContact[4] = new Address(separated[4]);
-                parsedContact[5] = new Email(separated[5]);
+                parsedContact[id] = new Id(separated[0]);
+                parsedContact[firstName] = new FirstName(separated[1]);
+                parsedContact[lastName] = new LastName(separated[2]);
+                parsedContact[phoneNumber] = new PhoneNumber(separated[3]);
+                parsedContact[address] = new Address(separated[4]);
+                parsedContact[email] = new Email(separated[5]);
             } catch (IllegalArgumentException e) {
                 throw e;
             }

@@ -73,13 +73,18 @@ public class ContactsApp {
      * @param input is a String containing the validated command to be parsed.
      */
     private static void parseInput(final String input) {
+        final int help = 0;
+        final int exit = 1;
+        final int quit = 2;
+        final int open = 3;
+        final int update = 4;
+        final int add = 5;
+        final int delete = 6;
         File contacts = new File(fileName);
-        // help
-        if (input.equalsIgnoreCase("h")) {
+        if (input.equalsIgnoreCase(COMMANDS[help])) {
             help();
-        // quit
-        } else if (input.equalsIgnoreCase("q")
-                   || input.equalsIgnoreCase("e")) {
+        } else if (input.equalsIgnoreCase(COMMANDS[exit])
+                   || input.equalsIgnoreCase(COMMANDS[quit])) {
             boolean validInput = false;
             while (!validInput) {
                 System.out.println("Are you sure you want to quit? (y/n)");
@@ -92,14 +97,12 @@ public class ContactsApp {
                 }
             }
             quit = true;
-        // open
-        } else if (input.equalsIgnoreCase("o")) {
+        } else if (input.equalsIgnoreCase(COMMANDS[open])) {
             System.out.println("Give the path of the file you want to open:");
             try {
                 String path = GetInputs.getInput();
                 boolean exists = TextFile.validPath(path);
                 if (!exists) {
-                    // TODO ask if the user wants to create a new file
                     fileName = path;
                     openNewFile();
                 } else {
@@ -110,16 +113,13 @@ public class ContactsApp {
             } catch (NullPointerException e) {
                 System.out.println("You need to input a path.");
             }
-        // update
-        } else if (input.equalsIgnoreCase("u")) {
+        } else if (input.equalsIgnoreCase(COMMANDS[update])) {
             TextFile.updateFile(contacts, contactList);
             Display.displayContacts(contactList);
-        // add
-        } else if (input.equalsIgnoreCase("a")) {
+        } else if (input.equalsIgnoreCase(COMMANDS[add])) {
             TextFile.appendFile(contacts, contactList);
             Display.displayContacts(contactList);
-        // delete
-        } else if (input.equalsIgnoreCase("d")) {
+        } else if (input.equalsIgnoreCase(COMMANDS[delete])) {
             TextFile.deleteContact(contacts, contactList);
             Display.displayContacts(contactList);
         }
