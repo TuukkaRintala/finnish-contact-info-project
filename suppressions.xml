@@ -4,5 +4,5 @@
 <suppressions>
   <suppress checks="JavadocPackage" files=".*" />
   <suppress checks="HideUtilityClassConstructor" files=".*" />
-  <!-- <suppress checks="MagicNumber" files=".*" /> -->
+  <suppress checks="DesignForExtension" files=".*" />
 </suppressions>

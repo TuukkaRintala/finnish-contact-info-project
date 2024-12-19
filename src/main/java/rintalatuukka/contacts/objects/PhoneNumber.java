@@ -13,8 +13,10 @@ import java.util.regex.Matcher;
  */
 
 public class PhoneNumber implements Info {
-    // info contains the phone number information we wish to store in this
-    // object.
+    /**
+     * info contains the phone number information we wish to store in this
+     * object.
+     */
     private String info = "";
     /**
      * This constructor is for creating empty PhoneNumber objects and should be

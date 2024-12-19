@@ -13,7 +13,9 @@ import java.util.regex.Matcher;
  */
 
 public class Email implements Info {
-    // info contains the email information we wish to store in this object.
+    /**
+     * info contains the email information we wish to store in this object.
+     */
     private String info = "";
     /**
      * This constructor is used for creating empty Email objects.

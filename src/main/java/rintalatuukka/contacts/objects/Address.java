@@ -13,14 +13,22 @@ import java.util.regex.Matcher;
  */
 
 public class Address implements Info {
-    // info contains the street address, zip code and city information separated
-    // by a dot.
+    /**
+     * info contains the street address, zip code and city information separated
+     * by a dot.
+     */
     private String info = "..";
-    // street contains the street address as a String.
+    /**
+     * street contains the street address as a String.
+     */
     private String street = "";
-    // zipCode contains the zip code as a String.
+    /**
+     * zipCode contains the zip code as a String.
+     */
     private String zipCode = "";
-    // city contains the city as a String.
+    /**
+     * city contains the city as a String.
+     */
     private String city = "";
     /**
      * This constructor is used for creating empty Address objects.

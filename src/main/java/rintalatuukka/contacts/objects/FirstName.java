@@ -13,7 +13,9 @@ import java.util.regex.Matcher;
  */
 
 public class FirstName implements Info {
-    // info contains the first name information we wish to store in this object.
+    /**
+     * info contains the first name information we wish to store in this object.
+     */
     private String info = "";
     /**
      * This constructor is for creating empty FirstName objects and should be

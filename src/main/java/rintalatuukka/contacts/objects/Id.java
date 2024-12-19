@@ -12,7 +12,9 @@ import java.util.regex.Matcher;
  * {@inheritDoc}
  */
 public class Id implements Info {
-    // info contains the finnish ID information we wish to store in this object.
+    /**
+     * info contains the finnish ID information we wish to store in this object.
+     */
     private String info = "";
     /**
      * This constructor is for creating empty Id objects and should be used with

@@ -12,15 +12,21 @@ import java.util.List;
  * @author Tuukka Rintala
  */
 public class Display {
-    // HEADER contains Strings corresponding to the types of contact info we
-    // wish to display.
+    /**
+     * HEADER contains Strings corresponding to the types of contact info we
+     * wish to display.
+     */
     private static final String[] HEADER = {"ID", "First name", "Last name",
                                             "Phone number", "Address", "Email"};
-    // listLength will contain the amount of characters in the length of the
-    // contact list.
+    /**
+     * listLength will contain the amount of characters in the length of the
+     * contact list.
+     */
     private static int listLength = 1;
-    // contactMax is an array of ints containing the lengths of the longest
-    // Strings of Info in the contact list.
+    /**
+     * contactMax is an array of ints containing the lengths of the longest
+     * Strings of Info in the contact list.
+     */
     private static int[] contactMax = new int[HEADER.length];
     /**
      * This method prints out the contents of a contact list.

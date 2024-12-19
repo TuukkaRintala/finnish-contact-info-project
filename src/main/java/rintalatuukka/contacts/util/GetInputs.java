@@ -13,7 +13,9 @@ import java.io.Console;
  * @author Tuukka Rintala
  */
 public class GetInputs {
-    // C is the console used to get inputs by the methods in this class.
+    /**
+     * C is the console used to get inputs by the methods in this class.
+     */
     private static final Console C = System.console();
     /**
      * This method is used to get a command specified in the argument.

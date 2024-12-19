@@ -13,15 +13,23 @@ import java.util.ArrayList;
  * @author Tuukka Rintala
  */
 public class ContactsApp {
-    // fileName is a constant String containing the path of the text file to be
-    // maintained.
+    /**
+     * fileName is a constant String containing the path of the text file to be
+     * maintained.
+     */
     private static String fileName = "contacts.csv";
-    // COMMANDS is an array containing the commands a user can input.
+    /**
+     * COMMANDS is an array containing the commands a user can input.
+     */
     private static final String[] COMMANDS = {"h", "e", "q", "o", "u", "a",
                                               "d"};
-    // contactList is the list of all contacts the user wants to manipulate.
+    /**
+     * contactList is the list of all contacts the user wants to manipulate.
+     */
     private static List<Info[]> contactList = new ArrayList<>();
-    // quit is a boolean informing the program whether it should quit operation.
+    /**
+     * quit is a boolean informing the program whether it should quit operation.
+     */
     private static boolean quit = false;
     /**
      * This method is called when the program is run.
@@ -75,7 +83,7 @@ public class ContactsApp {
     private static void parseInput(final String input) {
         final int help = 0;
         final int exit = 1;
-        final int quit = 2;
+        final int quitIndex = 2;
         final int open = 3;
         final int update = 4;
         final int add = 5;
@@ -84,7 +92,7 @@ public class ContactsApp {
         if (input.equalsIgnoreCase(COMMANDS[help])) {
             help();
         } else if (input.equalsIgnoreCase(COMMANDS[exit])
-                   || input.equalsIgnoreCase(COMMANDS[quit])) {
+                   || input.equalsIgnoreCase(COMMANDS[quitIndex])) {
             boolean validInput = false;
             while (!validInput) {
                 System.out.println("Are you sure you want to quit? (y/n)");

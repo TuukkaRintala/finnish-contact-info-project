@@ -7,7 +7,6 @@ import main.java.rintalatuukka.contacts.objects.LastName;
 import main.java.rintalatuukka.contacts.objects.PhoneNumber;
 import main.java.rintalatuukka.contacts.objects.Address;
 import main.java.rintalatuukka.contacts.objects.Email;
-import main.java.rintalatuukka.contacts.util.Display;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
@@ -30,7 +29,9 @@ import java.util.ArrayList;
  */
 
 public class TextFile {
-    // SEPARATOR is the character used to separate values in the CSV-file.
+    /**
+     * SEPARATOR is the character used to separate values in the CSV-file.
+     */
     private static final char SEPARATOR = ';';
     /**
      * This method takes the stored data in the argument, and parses it into a
@@ -106,12 +107,13 @@ public class TextFile {
                   "contains too few arguments, contents discarded");
         } else {
             try {
-                parsedContact[id] = new Id(separated[0]);
-                parsedContact[firstName] = new FirstName(separated[1]);
-                parsedContact[lastName] = new LastName(separated[2]);
-                parsedContact[phoneNumber] = new PhoneNumber(separated[3]);
-                parsedContact[address] = new Address(separated[4]);
-                parsedContact[email] = new Email(separated[5]);
+                parsedContact[id] = new Id(separated[id]);
+                parsedContact[firstName] = new FirstName(separated[firstName]);
+                parsedContact[lastName] = new LastName(separated[lastName]);
+                parsedContact[phoneNumber] =
+                                        new PhoneNumber(separated[phoneNumber]);
+                parsedContact[address] = new Address(separated[address]);
+                parsedContact[email] = new Email(separated[email]);
             } catch (IllegalArgumentException e) {
                 throw e;
             }
@@ -121,10 +123,12 @@ public class TextFile {
     /**
      * This method updates the information of a contact.
      *
-     * The user is asked to input the index they wish to update, then each Info-
-     * object at the specified index in the list is asked to run a method gets
-     * new information from the user. Then the list is overwritten onto the CSV.
-     * If there are no contacts in the list an error message is printed instead.
+     * The user is asked to input the index they wish to update, then the
+     * information at that index is displayed and the user is asked if they want
+     * to update that information. If yes then each Info-object at the specified
+     * index in the list is asked to run a method gets new information from the
+     * user. Then the list is overwritten onto the CSV. If there are no contacts
+     * in the list an error message is printed instead.
      *
      * @param contacts the File storing the contact information.
      * @param contactList a List containing contact information.
@@ -199,11 +203,15 @@ public class TextFile {
      * This method asks the user for an index and deletes a contact from that
      * index from the contact list.
      *
-     * 
+     * The user is prompted to give an index that is then validated to make sure
+     * it is within range. Then the chosen contact information is displayed and
+     * the user is asked if they wish to delete it. If yes, it is removed from
+     * the list and the list is overwritten onto the text file.
      *
      * @param contacts is the CSV file where we store the contacts.
      * @param contactList is a list of Info-object arrays containing finnish
      * contact information.
+     * @return the second argument with up to one object removed.
      */
     public static List<Info[]> deleteContact(final File contacts,
                                      final List<Info[]> contactList) {
