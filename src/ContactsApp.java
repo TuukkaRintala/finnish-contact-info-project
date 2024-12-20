@@ -46,8 +46,8 @@ public class ContactsApp {
         openNewFile();
         String input = "";
         while (!quit) {
-            String prompt = "Give a command. h for help.";
-            String error = "Command not recognised.";
+            final String prompt = "Give a command. h for help.";
+            final String error = "Command not recognised.";
             input = GetInputs.getValidCommand(COMMANDS, prompt, error);
             parseInput(input);
         }
