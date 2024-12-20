@@ -26,12 +26,16 @@ public class GetInputs {
      * and take then next input and check it again.
      *
      * @param commands an array of Strings containing acceptable commands.
+     * @param prompt is a String that is printed to ask the user for a command.
+     * @param error is a String that gets printed when the user inputs an
+     * invalid command.
      * @return a String containing the validated command.
      */
-    public static String getValidCommand(final String[] commands) {
+    public static String getValidCommand(final String[] commands,
+                                      final String prompt, final String error) {
         boolean validInput = false;
         String input = "";
-        System.out.println("Give a command. h for help.");
+        System.out.println(prompt);
         while (!validInput) {
             input = C.readLine().trim();
             for (int i = 0; i < commands.length; i++) {
@@ -39,7 +43,7 @@ public class GetInputs {
                     return input;
                 }
             }
-            System.out.println("Command not recognised.");
+            System.out.println(error);
         }
         return input;
     }

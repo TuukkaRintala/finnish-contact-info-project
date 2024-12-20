@@ -137,9 +137,9 @@ public class TextFile {
      */
     public static List<Info[]> updateFile(final File contacts,
                                           final List<Info[]> contactList) {
-        boolean validInput = false;
         int index = 0;
         if (contactList.size() != 0) {
+            boolean validInput = false;
             System.out.println("Give the index you wish to update.");
             // Getting a valid index
             while (!validInput) {
@@ -162,11 +162,30 @@ public class TextFile {
             displayList.add(updateThis);
             Display.displayContacts(displayList);
             boolean update = GetInputs.yesOrNo("Update this contact? (y/n)");
+            String[] infoTypes = {"ID", "First name", "Last name",
+                                  "Phone number", "Address", "Email", "All"};
+            String prompt = "Give the type of information you wish to update.";
+            String error = "Invalid input, information types are: ID, First "
+                            + "name, Last name, Phone number, Address, Email "
+                            + "and All";
+            String infoInput = "";
             if (update) {
-                for (int i = 0; i < updateThis.length; i++) {
-                    updateThis[i].inputInfo();
+                infoInput = GetInputs.getValidCommand(infoTypes, prompt, error);
+                if (infoInput.equalsIgnoreCase(
+                                             infoTypes[infoTypes.length - 1])) {
+                    for (int i = 0; i < updateThis.length; i++) {
+                        updateThis[i].inputInfo();
+                    }
+                    saveIntoFile(contacts, contactList);
+                } else {
+                    for (int i = 0; i < infoTypes.length - 1; i++) {
+                        if (infoInput.equalsIgnoreCase(infoTypes[i])) {
+                            updateThis[i].inputInfo();
+                            break;
+                        }
+                    }
+                    saveIntoFile(contacts, contactList);
                 }
-                saveIntoFile(contacts, contactList);
             }
         } else {
             System.out.println("No contacts to update.");

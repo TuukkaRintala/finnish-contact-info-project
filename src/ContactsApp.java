@@ -46,7 +46,9 @@ public class ContactsApp {
         openNewFile();
         String input = "";
         while (!quit) {
-            input = GetInputs.getValidCommand(COMMANDS);
+            String prompt = "Give a command. h for help.";
+            String error = "Command not recognised.";
+            input = GetInputs.getValidCommand(COMMANDS, prompt, error);
             parseInput(input);
         }
     }
@@ -98,14 +100,15 @@ public class ContactsApp {
                 System.out.println("Are you sure you want to quit? (y/n)");
                 String response = GetInputs.getInput();
                 if (response.equalsIgnoreCase("y")) {
+                    TextFile.saveIntoFile(contacts, contactList);
                     quit = true;
                     validInput = true;
                 } else if (response.equalsIgnoreCase("n")) {
                     validInput = true;
                 }
             }
-            quit = true;
         } else if (input.equalsIgnoreCase(COMMANDS[open])) {
+            TextFile.saveIntoFile(contacts, contactList);
             System.out.println("Give the path of the file you want to open:");
             try {
                 String path = GetInputs.getInput();

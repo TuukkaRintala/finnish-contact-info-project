@@ -7,7 +7,16 @@ The program supports creating, reading, updating and deleting finnish contact in
 Download the code, unzip it and navigate to the /src folder in a terminal and use the command `javac ContactsApp.java`. You must have Java JDK 21 or later installed.
 Now you can run the program from the /src folder in a terminal using the command `java ContactsApp`.
 ## Running the program
-Upon opening the program, it will import data or open a new CSV-file at the path specified in the code. By default, it is contacts.csv and it can be changed here: ![](n5FBngi.png)
+Upon opening the program, it will import data or open a new CSV-file at the path specified in the code. By default, it is contacts.csv and it can be changed here: ![](src/doc/docPic1.png) You will then be prompted to give a command and told to type h for help. 
+### Help
+Typing h and pressing enter will bring up the rest of the commands and their explanations. ![](src/doc/docPic2.png) If you decide to add commands to the program they need to be added in two places, an array that holds all the acceptable commands: ![](src/doc/docPic3.png) and the help method in ContactsApp: ![](src/doc/docPic4.png)
+I might implement the commands as objects if I revisit this project later, that way you wouldn't have to hardcode help and the command parser, however I came up with that idea too late in the process.
+### Exit/Quit
+Typing q or e and pressing enter, the program will ask you if you want to stop it, if yes you will be asked if you want to overwrite saved data. ![](src/doc/docPic5.png) ![](src/doc/docPic6.png)
+### Open
+Typing o and pressing enter, the program will ask you if you want to overwrite the saved data, then ask for the path of the file you want to open. If you give the path to an existing text file, the program will attempt to import the data from that file and display it. If you give a path that doesn't exist a new file will be created, unless the directory doesn't exist either. ![](src/doc/docPic7.png) ![](src/doc/docPic8.png)
+### Update
+Typing u and pressing enter, the program will ask you for the index of the contact you wish to update. Afterwards you will be asked what type of information you want to update, or if you want to update all of it. You will then be asked to input the specified type of information to replace the current information, and your input will not be accepted if not valid: ![](src/doc/docPic9.png) ![](src/doc/docPic10.png) Afterwards you will be asked if you want to overwrite the saved data.
 # Code style
 I am using the Sun Code Convention for Java.
 # Credits
