@@ -14,14 +14,14 @@ I might implement the commands as objects if I revisit this project later, that 
 ### Exit/Quit
 Typing q or e and pressing enter, the program will ask you if you want to stop it, if yes you will be asked if you want to overwrite saved data. ![](src/doc/docPic5.png) ![](src/doc/docPic6.png)
 ### Open
-Typing o and pressing enter, the program will ask you if you want to overwrite the saved data, then ask for the path of the file you want to open. If you give the path to an existing text file, the program will attempt to import the data from that file and display it. If you give a path that doesn't exist a new file will be created, unless the directory doesn't exist either. ![](src/doc/docPic7.png) ![](src/doc/docPic8.png)
+Typing o and pressing enter, the program will ask you if you want to overwrite the saved data, then ask for the path of the file you want to open. If you give the path to an existing text file, the program will attempt to import the data from that file and display it. If you give a path that doesn't exist a new file will be created, unless the directory doesn't exist either. ![](src/doc/docPic7.png) ![](src/doc/docPic8.png) ![](src/doc/docPic15.png)
 ### Update
 Typing u and pressing enter, the program will ask you for the index of the contact you wish to update. Afterwards you will be asked what type of information you want to update, or if you want to update all of it. You will then be asked to input the specified type of information to replace the current information, and your input will not be accepted if not valid: ![](src/doc/docPic9.png) ![](src/doc/docPic10.png) Afterwards you will be asked if you want to overwrite the saved data.
 ### Add
 Typing a and pressing enter, the program will ask you for the contact information for a new contact. Each
 piece of information will be asked and validated separately: ![](src/doc/docPic11.png) ![](src/doc/docPic12.png) Afterwards you will be asked if you want to overwrite the saved data.
 ### Delete
-Typing d and pressing enter, the program will ask you for an index. After a valid index is provided, that contact information will be printed out and you will be asked if you want to delete it: ![](src/doc/docPic10.png) ![](src/doc/docPic10.png) Afterwards you will be asked if you want to overwrite the saved data.
+Typing d and pressing enter, the program will ask you for an index. After a valid index is provided, that contact information will be printed out and you will be asked if you want to delete it: ![](src/doc/docPic13.png) ![](src/doc/docPic14.png) Afterwards you will be asked if you want to overwrite the saved data.
 # Code style
 I am using the Sun Code Convention for Java.
 # Credits

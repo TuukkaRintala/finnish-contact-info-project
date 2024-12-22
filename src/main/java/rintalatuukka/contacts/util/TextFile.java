@@ -69,15 +69,12 @@ public class TextFile {
     private static List<Info[]> parseContactList(
                                                final List<String> contactList) {
         List<Info[]> parsedList = new ArrayList<>();
-        int missingLines = 0; // TODO, after reading contacts, give the user a
-        // chance to stop the program before updating the csv.
         for (int i = 0; i < contactList.size(); i++) {
             try {
                 Info[] addThis = stringToContact(contactList.get(i));
                 parsedList.add(addThis);
             } catch (IllegalArgumentException e) {
                 System.out.println("Line " + (i + 1) + e.getMessage());
-                missingLines++;
             }
         }
         return parsedList;

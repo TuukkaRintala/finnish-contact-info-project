@@ -95,17 +95,11 @@ public class ContactsApp {
             help();
         } else if (input.equalsIgnoreCase(COMMANDS[exit])
                    || input.equalsIgnoreCase(COMMANDS[quitIndex])) {
-            boolean validInput = false;
-            while (!validInput) {
-                System.out.println("Are you sure you want to quit? (y/n)");
-                String response = GetInputs.getInput();
-                if (response.equalsIgnoreCase("y")) {
-                    TextFile.saveIntoFile(contacts, contactList);
-                    quit = true;
-                    validInput = true;
-                } else if (response.equalsIgnoreCase("n")) {
-                    validInput = true;
-                }
+            boolean response = GetInputs.yesOrNo("Are you sure you want to"
+                                                    + " quit? (y/n)");
+            if (response) {
+                TextFile.saveIntoFile(contacts, contactList);
+                quit = true;
             }
         } else if (input.equalsIgnoreCase(COMMANDS[open])) {
             TextFile.saveIntoFile(contacts, contactList);
