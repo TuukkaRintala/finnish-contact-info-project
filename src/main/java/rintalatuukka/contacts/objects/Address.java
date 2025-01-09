@@ -5,8 +5,8 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 /**
- * This object contains the info for a finnish addresses and methods to
- * manipulate that data.
+ * This object contains the info for finnish addresses and methods to manipulate
+ * that data.
  *
  * @author Tuukka Rintala
  * {@inheritDoc}
