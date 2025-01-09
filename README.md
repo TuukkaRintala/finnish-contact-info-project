@@ -1,7 +1,7 @@
 # Finnish contact info project
 This is a project for the introduction to programming course at Tampere University of Applied Sciences. The aim is to make a program that can read and modify a text file that contains contact information.
 ## Screencast
-Here is a [video overview](https://youtu.be/ADbvT_XcaMM) of the programs user experience, developer perspective, known bugs and a short self-evaluation of the project. 
+Here is a [video overview](https://youtu.be/FsP2ON1gpig) of the programs user experience, developer perspective, known bugs and a short self-evaluation of the project. 
 # Features
 The program supports creating, reading, updating and deleting finnish contact info from CSV files using a command line user interface. The information you can store includes a finnish personal ID number, first name, last name, phone number, address and e-mail and each piece of information is validated when it is stored.
 # Setup and running the program
