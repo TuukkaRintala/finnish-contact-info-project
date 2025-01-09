@@ -14,12 +14,12 @@ import java.util.ArrayList;
  */
 public class ContactsApp {
     /**
-     * fileName is a constant String containing the path of the text file to be
+     * fileName is a String containing the path of the text file to be
      * maintained.
      */
     private static String fileName = "contacts.csv";
     /**
-     * COMMANDS is an array containing the commands a user can input.
+     * COMMANDS is a constant array containing the commands a user can input.
      */
     private static final String[] COMMANDS = {"h", "e", "q", "o", "u", "a",
                                               "d"};
